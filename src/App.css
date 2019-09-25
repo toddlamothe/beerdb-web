@@ -1,3 +1,16 @@
+body {
+  padding-top: 0px;
+  padding-left: 0px;
+  padding-right: 0px;
+} 
+
+.container-fluid {
+  padding-right: 0px;
+  padding-left: 0px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
 .App {
   text-align: center;
 }
