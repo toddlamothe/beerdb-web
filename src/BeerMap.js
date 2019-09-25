@@ -1,15 +1,13 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { withGoogleMap, withScriptjs, GoogleMap, Marker } from 'react-google-maps'
 
-// class BeerMap extends React.Component {
-// 
-// }
-
-function BeerMap(props) {
-  return (
-    <div id="map" className="beerdb-map"></div>
-  )
-}
+const BeerMap = withScriptjs(withGoogleMap((props) =>
+  <GoogleMap
+    defaultZoom={8}
+    defaultCenter={{ lat: -34.397, lng: 150.644 }}
+  >
+    {props.isMarkerShown && <Marker position={{ lat: -34.397, lng: 150.644 }} />}
+  </GoogleMap>
+))
 
 export default BeerMap;
