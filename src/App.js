@@ -4,6 +4,7 @@ import BeerMap from './BeerMap';
 import Modal from 'react-modal';
 import SlidingPane from 'react-sliding-pane';
 import 'react-sliding-pane/dist/react-sliding-pane.css';
+import HamburgerMenu from 'react-hamburger-menu';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -18,12 +19,40 @@ class App extends React.Component {
   
   componentDidMount() {
       Modal.setAppElement(this.el);
-  };  
+  };
+  
+  handleClick() {
+    console.log("[handleClick]")
+      this.setState({
+          isSearchPanelOpen: !this.state.isSearchPanelOpen
+      });
+  }  
 
   render() {
       return ( 
         <div className="App">
           <div className="App">
+
+          <nav className="navbar navbar-light">
+            <div>
+                <button onClick={ () => this.setState({ isInfoPanelOpen: true }) }>
+                    Open Bottom Panel
+                </button>
+            </div>
+
+          <HamburgerMenu
+              isOpen={this.state.isSearchPanelOpen}
+              menuClicked={this.handleClick.bind(this)}
+              width={18}
+              height={15}
+              strokeWidth={1}
+              rotate={0}
+              color='black'
+              borderRadius={0}
+              animationDuration={0.5}
+          />
+          </nav>
+
             <BeerMap
               isMarkerShown
               googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyB8XchO4u2Ig273475Zl1RImvskWNZDEOw&v=3.exp&libraries=geometry,drawing,places"
@@ -34,40 +63,28 @@ class App extends React.Component {
           </div>     
           
           <div ref={ref => this.el = ref}>
-            <button onClick={() => this.setState({ isSearchPanelOpen: true })}>Click me to open right pane!</button>
-            <div style={{ marginTop: '32px' }}>
-                <button onClick={ () => this.setState({ isSearchPanelOpen: true }) }>
-                    Click me to open left pane with 20% width!
-                </button>
-            </div>
-            <div style={{ marginTop: '32px' }}>
-                <button onClick={ () => this.setState({ isInfoPanelOpen: true }) }>
-                    Click me to open BOTTOM pane!
-                </button>
-            </div>
-
             <SlidingPane
                 className='some-custom-class'
                 overlayClassName='some-custom-overlay-class'
                 isOpen={ this.state.isSearchPanelOpen }
-                title='Hey, it is optional pane title.  I can be React component too.'
-                subtitle='Optional subtitle.'
+                title='Brewery Search'
+                // subtitle='Optional subtitle.'
                 onRequestClose={ () => {
                     // triggered on "<" on left top click or on outside click
                     this.setState({ isSearchPanelOpen: false });
                 } }>
-                <div>And I am pane content. BTW, what rocks?</div>
-                <br />
-                <img src='img.png' />
+                <div>
+                  Brewery Search Controls Go Here
+                </div>
             </SlidingPane>
             <SlidingPane
-                closeIcon={<div>CLOSE BOTTOM PANE</div>}
+                closeIcon={<div>BREWERY NAME HERE</div>}
                 isOpen={ this.state.isInfoPanelOpen }
-                title='BOTTOM PANE'
+                // title='BOTTOM PANE'
                 from='bottom'
                 width='100%'
                 onRequestClose={ () => this.setState({ isInfoPanelOpen: false }) }>
-                <div>And I am pane content on BOTTOM.</div>
+                <div>Info Panel Content Here</div>
             </SlidingPane>
           </div>
         </div>
