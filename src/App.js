@@ -21,7 +21,7 @@ class App extends React.Component {
       Modal.setAppElement(this.el);
   };
   
-  handleClick() {
+  toggleSearchPanel() {
     console.log("[handleClick]")
       this.setState({
           isSearchPanelOpen: !this.state.isSearchPanelOpen
@@ -31,8 +31,6 @@ class App extends React.Component {
   render() {
       return ( 
         <div className="App">
-          <div className="App">
-
           <nav className="navbar navbar-light">
             <div>
                 <button onClick={ () => this.setState({ isInfoPanelOpen: true }) }>
@@ -42,7 +40,7 @@ class App extends React.Component {
 
           <HamburgerMenu
               isOpen={this.state.isSearchPanelOpen}
-              menuClicked={this.handleClick.bind(this)}
+              menuClicked={this.toggleSearchPanel.bind(this)}
               width={18}
               height={15}
               strokeWidth={1}
@@ -52,15 +50,13 @@ class App extends React.Component {
               animationDuration={0.5}
           />
           </nav>
-
-            <BeerMap
-              isMarkerShown
-              googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyB8XchO4u2Ig273475Zl1RImvskWNZDEOw&v=3.exp&libraries=geometry,drawing,places"
-              loadingElement={<div style={{ height: `100%` }} />}
-              containerElement={<div style={{ height: `100vh` }} />}
-              mapElement={<div style={{ height: `100%` }} />}
-            />
-          </div>     
+          <BeerMap
+            isMarkerShown
+            googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyB8XchO4u2Ig273475Zl1RImvskWNZDEOw&v=3.exp&libraries=geometry,drawing,places"
+            loadingElement={<div style={{ height: `100%` }} />}
+            containerElement={<div style={{ height: `100vh` }} />}
+            mapElement={<div style={{ height: `100%` }} />}
+          />
           
           <div ref={ref => this.el = ref}>
             <SlidingPane
