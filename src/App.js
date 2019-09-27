@@ -11,15 +11,14 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      isPaneOpen : false,
-      isPaneOpenBottom : false,
+      isSearchPanelOpen : false,
+      isInfoPanelOpen : false,
     };
   };
   
   componentDidMount() {
       Modal.setAppElement(this.el);
   };  
-
 
   render() {
       return ( 
@@ -32,19 +31,17 @@ class App extends React.Component {
               containerElement={<div style={{ height: `100vh` }} />}
               mapElement={<div style={{ height: `100%` }} />}
             />
-          </div>
+          </div>     
           
-          <a href="#" class="btn btn-primary" id="opener"><i class="glyphicon glyphicon-align-justify"></i></a>
-
           <div ref={ref => this.el = ref}>
-            <button onClick={() => this.setState({ isPaneOpen: true })}>Click me to open right pane!</button>
+            <button onClick={() => this.setState({ isSearchPanelOpen: true })}>Click me to open right pane!</button>
             <div style={{ marginTop: '32px' }}>
-                <button onClick={ () => this.setState({ isPaneOpenLeft: true }) }>
+                <button onClick={ () => this.setState({ isSearchPanelOpen: true }) }>
                     Click me to open left pane with 20% width!
                 </button>
             </div>
             <div style={{ marginTop: '32px' }}>
-                <button onClick={ () => this.setState({ isPaneOpenBottom: true }) }>
+                <button onClick={ () => this.setState({ isInfoPanelOpen: true }) }>
                     Click me to open BOTTOM pane!
                 </button>
             </div>
@@ -52,12 +49,12 @@ class App extends React.Component {
             <SlidingPane
                 className='some-custom-class'
                 overlayClassName='some-custom-overlay-class'
-                isOpen={ this.state.isPaneOpen }
+                isOpen={ this.state.isSearchPanelOpen }
                 title='Hey, it is optional pane title.  I can be React component too.'
                 subtitle='Optional subtitle.'
                 onRequestClose={ () => {
                     // triggered on "<" on left top click or on outside click
-                    this.setState({ isPaneOpen: false });
+                    this.setState({ isSearchPanelOpen: false });
                 } }>
                 <div>And I am pane content. BTW, what rocks?</div>
                 <br />
@@ -65,31 +62,17 @@ class App extends React.Component {
             </SlidingPane>
             <SlidingPane
                 closeIcon={<div>CLOSE BOTTOM PANE</div>}
-                isOpen={ this.state.isPaneOpenBottom }
+                isOpen={ this.state.isInfoPanelOpen }
                 title='BOTTOM PANE'
                 from='bottom'
                 width='100%'
-                onRequestClose={ () => this.setState({ isPaneOpenBottom: false }) }>
+                onRequestClose={ () => this.setState({ isInfoPanelOpen: false }) }>
                 <div>And I am pane content on BOTTOM.</div>
             </SlidingPane>
           </div>
         </div>
     )
   }  
-  
-  // render() {
-  //   return (
-  //     <div className="App">
-  //       <BeerMap
-  //         isMarkerShown
-  //         googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyB8XchO4u2Ig273475Zl1RImvskWNZDEOw&v=3.exp&libraries=geometry,drawing,places"
-  //         loadingElement={<div style={{ height: `100%` }} />}
-  //         containerElement={<div style={{ height: `100vh` }} />}
-  //         mapElement={<div style={{ height: `100%` }} />}
-  //       />
-  //     </div>
-  //   );    
-  // }
 }
 
 export default App;
