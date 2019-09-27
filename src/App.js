@@ -1,22 +1,95 @@
 import React from 'react';
 import logo from './logo.svg';
 import BeerMap from './BeerMap';
+import Modal from 'react-modal';
+import SlidingPane from 'react-sliding-pane';
+import 'react-sliding-pane/dist/react-sliding-pane.css';
 import './App.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
-function App() {
-  return (
-    <div className="App">
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      isPaneOpen : false,
+      isPaneOpenBottom : false,
+    };
+  };
+  
+  componentDidMount() {
+      Modal.setAppElement(this.el);
+  };  
 
-    <BeerMap
-      isMarkerShown
-      googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyB8XchO4u2Ig273475Zl1RImvskWNZDEOw&v=3.exp&libraries=geometry,drawing,places"
-      loadingElement={<div style={{ height: `100%` }} />}
-      containerElement={<div style={{ height: `100vh` }} />}
-      mapElement={<div style={{ height: `100%` }} />}
-    />
 
-    </div>
-  );
+  render() {
+      return ( 
+        <div className="App">
+          <div className="App">
+            <BeerMap
+              isMarkerShown
+              googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyB8XchO4u2Ig273475Zl1RImvskWNZDEOw&v=3.exp&libraries=geometry,drawing,places"
+              loadingElement={<div style={{ height: `100%` }} />}
+              containerElement={<div style={{ height: `100vh` }} />}
+              mapElement={<div style={{ height: `100%` }} />}
+            />
+          </div>
+          
+          <a href="#" class="btn btn-primary" id="opener"><i class="glyphicon glyphicon-align-justify"></i></a>
+
+          <div ref={ref => this.el = ref}>
+            <button onClick={() => this.setState({ isPaneOpen: true })}>Click me to open right pane!</button>
+            <div style={{ marginTop: '32px' }}>
+                <button onClick={ () => this.setState({ isPaneOpenLeft: true }) }>
+                    Click me to open left pane with 20% width!
+                </button>
+            </div>
+            <div style={{ marginTop: '32px' }}>
+                <button onClick={ () => this.setState({ isPaneOpenBottom: true }) }>
+                    Click me to open BOTTOM pane!
+                </button>
+            </div>
+
+            <SlidingPane
+                className='some-custom-class'
+                overlayClassName='some-custom-overlay-class'
+                isOpen={ this.state.isPaneOpen }
+                title='Hey, it is optional pane title.  I can be React component too.'
+                subtitle='Optional subtitle.'
+                onRequestClose={ () => {
+                    // triggered on "<" on left top click or on outside click
+                    this.setState({ isPaneOpen: false });
+                } }>
+                <div>And I am pane content. BTW, what rocks?</div>
+                <br />
+                <img src='img.png' />
+            </SlidingPane>
+            <SlidingPane
+                closeIcon={<div>CLOSE BOTTOM PANE</div>}
+                isOpen={ this.state.isPaneOpenBottom }
+                title='BOTTOM PANE'
+                from='bottom'
+                width='100%'
+                onRequestClose={ () => this.setState({ isPaneOpenBottom: false }) }>
+                <div>And I am pane content on BOTTOM.</div>
+            </SlidingPane>
+          </div>
+        </div>
+    )
+  }  
+  
+  // render() {
+  //   return (
+  //     <div className="App">
+  //       <BeerMap
+  //         isMarkerShown
+  //         googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyB8XchO4u2Ig273475Zl1RImvskWNZDEOw&v=3.exp&libraries=geometry,drawing,places"
+  //         loadingElement={<div style={{ height: `100%` }} />}
+  //         containerElement={<div style={{ height: `100vh` }} />}
+  //         mapElement={<div style={{ height: `100%` }} />}
+  //       />
+  //     </div>
+  //   );    
+  // }
 }
 
 export default App;

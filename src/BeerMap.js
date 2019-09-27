@@ -3,8 +3,8 @@ import { withGoogleMap, withScriptjs, GoogleMap, Marker } from 'react-google-map
 
 const BeerMap = withScriptjs(withGoogleMap((props) =>
   <GoogleMap
-    defaultZoom={8}
-    defaultCenter={{ lat: 44.475883, lng: -73.212074 }}
+    defaultZoom={4}
+    defaultCenter={{ lat: 39.8283, lng: -98.5795 }}
   >
     {props.isMarkerShown && <Marker position={{ lat: -44.475883, lng: -73.212074 }} />}
   </GoogleMap>
