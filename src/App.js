@@ -1,6 +1,7 @@
 import React from 'react';
 import logo from './logo.svg';
-import BeerMap from './BeerMap';
+import BeerMap from './components/BeerMap';
+import BeerSearchForm from './components/BeerSearchForm'
 import Modal from 'react-modal';
 import SlidingPane from 'react-sliding-pane';
 import 'react-sliding-pane/dist/react-sliding-pane.css';
@@ -14,6 +15,7 @@ class App extends React.Component {
     this.state = {
       isSearchPanelOpen : false,
       isInfoPanelOpen : false,
+      breweries : {}, 
     };
   };
   
@@ -22,7 +24,6 @@ class App extends React.Component {
   };
   
   toggleSearchPanel() {
-    console.log("[handleClick]")
       this.setState({
           isSearchPanelOpen: !this.state.isSearchPanelOpen
       });
@@ -69,9 +70,7 @@ class App extends React.Component {
                     // triggered on "<" on left top click or on outside click
                     this.setState({ isSearchPanelOpen: false });
                 } }>
-                <div>
-                  Brewery Search Controls Go Here
-                </div>
+                <BeerSearchForm />
             </SlidingPane>
             <SlidingPane
                 closeIcon={<div>BREWERY NAME HERE</div>}
