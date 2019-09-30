@@ -18,6 +18,16 @@ class BeerSearchForm extends React.Component {
     this.handleChangeCity = this.handleChangeCity.bind(this);
     this.handleChangeState = this.handleChangeState.bind(this);
     this.handleChangeZip = this.handleChangeZip.bind(this);
+    this.handleBrewerySearch = this.handleBrewerySearch.bind(this);
+  }
+  
+  handleBrewerySearch() {
+    console.log("[handleBrewerySearch]");
+    this.setState({
+      lat : null,
+      lon : null
+    });
+    this.props.onSearchSubmitted(this.state)    
   }
   
   handleChangeCity(event) {
@@ -62,7 +72,7 @@ class BeerSearchForm extends React.Component {
             onChange={this.handleChangeZip}
             />
         </Form.Group>
-        <Button variant="primary" onClick={() => this.props.onSearchSubmitted(this.state)}>Search</Button>&nbsp;
+        <Button variant="primary" onClick={() => this.handleBrewerySearch()}>Search</Button>&nbsp;
         <Button variant="primary" type="submit">Near Me</Button>
       </Form>
     );
