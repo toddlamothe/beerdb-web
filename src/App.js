@@ -28,6 +28,11 @@ class App extends React.Component {
           isSearchPanelOpen: !this.state.isSearchPanelOpen
       });
   }  
+  
+  onSearchSubmitted(searchCriteria) {
+    console.log("[App.js-> onSearchSubmitted]");
+    console.log("searchCriteria = ", searchCriteria);
+  }
 
   render() {
       return ( 
@@ -70,7 +75,8 @@ class App extends React.Component {
                     // triggered on "<" on left top click or on outside click
                     this.setState({ isSearchPanelOpen: false });
                 } }>
-                <BeerSearchForm />
+                <BeerSearchForm
+                  onSearchSubmitted={this.onSearchSubmitted} />
             </SlidingPane>
             <SlidingPane
                 closeIcon={<div>BREWERY NAME HERE</div>}
