@@ -17,6 +17,8 @@ class App extends React.Component {
       isInfoPanelOpen : false,
       breweries : {}, 
     };
+    
+    this.onSearchSubmitted = this.onSearchSubmitted.bind(this);
   };
   
   componentDidMount() {
@@ -27,11 +29,106 @@ class App extends React.Component {
       this.setState({
           isSearchPanelOpen: !this.state.isSearchPanelOpen
       });
-  }  
+  };
   
   onSearchSubmitted(searchCriteria) {
     console.log("[App.js-> onSearchSubmitted]");
     console.log("searchCriteria = ", searchCriteria);
+    this.searchBreweriesByCriteria(searchCriteria);
+  };
+  
+  searchBreweriesByCriteria(searchCriteria) {
+    console.log("[searchBreweriesByCriteria]");
+      var city, state, zip;
+      // Clear map
+      // window.map.clearOverlays();
+
+      if(!this.searchCriteriaIsValid(searchCriteria)) {
+          console.error("Invalid search criteria")
+          // this.showInputValidationError();
+          return;
+      };
+
+      // hideInfoPanel();
+      // hideInputValidationError();
+      // showSpinner();
+      
+      searchCriteria.city ? city = searchCriteria.city : city = "";
+      searchCriteria.state ? state = searchCriteria.state : state = "";
+      searchCriteria.zip ? zip = searchCriteria.zip : state = "";
+      console.log("city = ", city);
+      console.log("state = ", state);
+      console.log("zip = ", zip);
+      
+      this.fetchBreweries(city, state, zip, (breweries) => {
+        console.log("[fetchBreweries callback]");
+        // Show breweries on the map
+        this.showBreweries(breweries);
+      });
+  };
+  
+  fetchBreweries(city, state, zip, callback) {
+    var baseUrl = " https://yxnbc1dm5e.execute-api.us-east-1.amazonaws.com/dev/breweries?postalCode=" + zip + "&city=" + city + "&state=" + state;
+    var apiKey = "PI9U8B6hNg3Kb80alaGgx4JqzWpd7Sjn14ObVXzb"; //x-api-key
+    var breweries;
+    console.log("[fetchBreweries]");
+
+    // fetch('http://jsonplaceholder.typicode.com/users')
+    //     .then(res => res.json())
+    //     .then((data) => {
+    //       console.log("data = ", data);
+    //       this.setState({ contacts: data })
+    //     })
+    //     .catch(console.log)
+
+    // $.ajax({
+    //     type: 'GET',
+    //     url: baseUrl,
+    //     crossDomain: true,
+    //     headers: { "x-api-key": apiKey },
+    //     contentType: 'application/json'
+    // })
+    // .done(function(data) {
+    //   console.log("totalResults: ", data.totalResults);
+    //   if (data.totalResults > 0) {
+    //       // Map breweries to usable data set
+    //       breweries = data.data.map((brewery) => {
+    //           console.log("brewery map function");
+    //           return {
+    //               "name" : brewery.brewery.name,
+    //               "id" : brewery.breweryId,
+    //               "description" : brewery.brewery.description,
+    //               "url" : brewery.brewery.website,
+    //               "coords" : {
+    //                   "lat" : brewery.latitude,
+    //                   "lng" : brewery.longitude
+    //               },
+    //               "images" : brewery.brewery.images
+    //           }
+    //       });
+    //       callback(breweries);
+    //   }
+    //   else {
+    //       // No results
+    //   }
+    //   hideSpinner();
+    // });
+  };
+
+  showBreweries() {
+    console.log("[showBreweries]");
+  }
+  
+  searchCriteriaIsValid(searchCriteria) {
+      if ( 
+          (searchCriteria.city == "" || searchCriteria.city == null) &&
+          (searchCriteria.state == "" || searchCriteria.state == null) &&
+          (searchCriteria.zip == "" || searchCriteria.zip == null)
+      ) {
+          // Required form elements are not filled out
+          return false;
+      }
+      return true;
   }
 
   render() {

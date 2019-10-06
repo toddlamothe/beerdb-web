@@ -1,8 +1,11 @@
 import React from 'react';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
+import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import './BeerSearchForm.css';
+import BeerSearchFormInvalidCriteriaError from './BeerSearchFormInvalidCriteriaError';
 
 class BeerSearchForm extends React.Component {
   constructor(props) {
@@ -13,8 +16,9 @@ class BeerSearchForm extends React.Component {
       zip : "",
       lat : "",
       lon : "" ,
+      showInvalidCriteriaError : false
     }
-    
+        
     this.handleChangeCity = this.handleChangeCity.bind(this);
     this.handleChangeState = this.handleChangeState.bind(this);
     this.handleChangeZip = this.handleChangeZip.bind(this);
@@ -22,10 +26,10 @@ class BeerSearchForm extends React.Component {
   }
   
   handleBrewerySearch() {
-    console.log("[handleBrewerySearch]");
     this.setState({
       lat : null,
-      lon : null
+      lon : null,
+      showInvalidCriteriaError : false
     });
     this.props.onSearchSubmitted(this.state)    
   }
@@ -42,39 +46,60 @@ class BeerSearchForm extends React.Component {
     this.setState({zip: event.target.value});
   }
     
+  renderError() {
+    return (
+      <BeerSearchFormInvalidCriteriaError
+        visible={this.state.showInvalidCriteriaError} 
+      />
+    )
+  }
+
   render() {
     return (
-      <Form>
-        <Form.Group controlId="city">
-          <Form.Label>City</Form.Label>
-          <Form.Control 
-            type="text" 
-            size="sm" 
-            placeholder="enter city" 
-            onChange={this.handleChangeCity}
-            />
-        </Form.Group>
-        <Form.Group controlId="state">
-          <Form.Label>State</Form.Label>
-          <Form.Control 
-            type="text" 
-            size="sm" 
-            placeholder="enter state"             
-            onChange={this.handleChangeState}
-            />
-        </Form.Group>
-        <Form.Group controlId="zip">
-          <Form.Label>Zip</Form.Label>
-          <Form.Control 
-            type="text" 
-            size="sm" 
-            placeholder="enter zip"
-            onChange={this.handleChangeZip}
-            />
-        </Form.Group>
-        <Button variant="primary" onClick={() => this.handleBrewerySearch()}>Search</Button>&nbsp;
-        <Button variant="primary" type="submit">Near Me</Button>
-      </Form>
+      <React.Fragment>
+        <Container>
+        <Row>
+          <Col>
+            {this.renderError()}
+          </Col>
+        </Row>
+        <Row>
+          <Col>
+            <Form>
+              <Form.Group controlId="city">
+                <Form.Label>City</Form.Label>
+                <Form.Control 
+                  type="text" 
+                  size="sm" 
+                  placeholder="enter city" 
+                  onChange={this.handleChangeCity}
+                  />
+              </Form.Group>
+              <Form.Group controlId="state">
+                <Form.Label>State</Form.Label>
+                <Form.Control 
+                  type="text" 
+                  size="sm" 
+                  placeholder="enter state"             
+                  onChange={this.handleChangeState}
+                  />
+              </Form.Group>
+              <Form.Group controlId="zip">
+                <Form.Label>Zip</Form.Label>
+                <Form.Control 
+                  type="text" 
+                  size="sm" 
+                  placeholder="enter zip"
+                  onChange={this.handleChangeZip}
+                  />
+              </Form.Group>
+              <Button variant="primary" onClick={() => this.handleBrewerySearch()}>Search</Button>&nbsp;
+              <Button variant="primary" type="submit">Near Me</Button>
+            </Form>
+          </Col>
+        </Row>
+        </Container>
+      </React.Fragment>
     );
   } 
 }
