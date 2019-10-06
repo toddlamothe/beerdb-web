@@ -67,13 +67,38 @@ class App extends React.Component {
     var breweries;
     console.log("[fetchBreweries]");
 
-    // fetch('http://jsonplaceholder.typicode.com/users')
-    //     .then(res => res.json())
-    //     .then((data) => {
-    //       console.log("data = ", data);
-    //       this.setState({ contacts: data })
-    //     })
-    //     .catch(console.log)
+    fetch(baseUrl, {
+      method: 'GET',
+      headers: {
+        "Content-Type": "application/json",
+        "x-api-key" : apiKey
+      },
+    })
+        .then(res => res.json())
+        .then((data) => {
+          this.toggleSearchPanel();
+          if (data.totalResults && data.totalResults > 0) {
+            breweries = data.data.map((brewery) => {
+                console.log("brewery map function");
+                return {
+                    "name" : brewery.brewery.name,
+                    "id" : brewery.breweryId,
+                    "description" : brewery.brewery.description,
+                    "url" : brewery.brewery.website,
+                    "coords" : {
+                        "lat" : brewery.latitude,
+                        "lng" : brewery.longitude
+                    },
+                    "images" : brewery.brewery.images
+                }
+            });
+            console.log("breweries = ", breweries);            
+          }
+          else {
+            console.log("search returned no results");
+          }
+        })
+        .catch(console.log)
 
     // $.ajax({
     //     type: 'GET',

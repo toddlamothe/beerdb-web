@@ -26,7 +26,6 @@ class BeerSearchForm extends React.Component {
   }
   
   handleBrewerySearch() {
-
     if(!this.searchCriteriaIsValid(this.state)) {
         console.error("Invalid search criteria")
         this.setState({
