@@ -43,12 +43,6 @@ class App extends React.Component {
       // Clear map
       // window.map.clearOverlays();
 
-      if(!this.searchCriteriaIsValid(searchCriteria)) {
-          console.error("Invalid search criteria")
-          // this.showInputValidationError();
-          return;
-      };
-
       // hideInfoPanel();
       // hideInputValidationError();
       // showSpinner();
@@ -119,18 +113,6 @@ class App extends React.Component {
     console.log("[showBreweries]");
   }
   
-  searchCriteriaIsValid(searchCriteria) {
-      if ( 
-          (searchCriteria.city == "" || searchCriteria.city == null) &&
-          (searchCriteria.state == "" || searchCriteria.state == null) &&
-          (searchCriteria.zip == "" || searchCriteria.zip == null)
-      ) {
-          // Required form elements are not filled out
-          return false;
-      }
-      return true;
-  }
-
   render() {
       return ( 
         <div className="App">

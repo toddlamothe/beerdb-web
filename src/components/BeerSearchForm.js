@@ -26,6 +26,15 @@ class BeerSearchForm extends React.Component {
   }
   
   handleBrewerySearch() {
+
+    if(!this.searchCriteriaIsValid(this.state)) {
+        console.error("Invalid search criteria")
+        this.setState({
+          showInvalidCriteriaError : true
+        });
+        return;
+    };
+
     this.setState({
       lat : null,
       lon : null,
@@ -44,6 +53,18 @@ class BeerSearchForm extends React.Component {
   
   handleChangeZip(event) {
     this.setState({zip: event.target.value});
+  }
+  
+  searchCriteriaIsValid(searchCriteria) {
+      if ( 
+          (searchCriteria.city == "" || searchCriteria.city == null) &&
+          (searchCriteria.state == "" || searchCriteria.state == null) &&
+          (searchCriteria.zip == "" || searchCriteria.zip == null)
+      ) {
+          // Required form elements are not filled out
+          return false;
+      }
+      return true;
   }
     
   renderError() {
