@@ -15,7 +15,9 @@ class App extends React.Component {
     this.state = {
       isSearchPanelOpen : false,
       isInfoPanelOpen : false,
-      breweries : {}, 
+      breweries : [
+        { "lat" : 39.8283, "lng" : -88.5795 }
+      ]
     };
     
     this.onSearchSubmitted = this.onSearchSubmitted.bind(this);
@@ -92,7 +94,8 @@ class App extends React.Component {
                     "images" : brewery.brewery.images
                 }
             });
-            console.log("breweries = ", breweries);            
+            console.log("breweries = ", breweries);
+            callback(breweries);          
           }
           else {
             console.log("search returned no results");
@@ -134,8 +137,14 @@ class App extends React.Component {
     // });
   };
 
-  showBreweries() {
+  showBreweries(breweries) {
     console.log("[showBreweries]");
+    this.setState( {
+      breweries : [
+        { "lat" : 39.8283, "lng" : -98.5795 },
+        { "lat" : 39.8283, "lng" : -88.5795 }
+      ]      
+    });
   }
   
   render() {
@@ -162,10 +171,8 @@ class App extends React.Component {
           </nav>
           <BeerMap
             isMarkerShown
-            googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyB8XchO4u2Ig273475Zl1RImvskWNZDEOw&v=3.exp&libraries=geometry,drawing,places"
-            loadingElement={<div style={{ height: `100%` }} />}
-            containerElement={<div style={{ height: `100vh` }} />}
-            mapElement={<div style={{ height: `100%` }} />}
+            breweries={this.state.breweries}
+           />}
           />
           
           <div ref={ref => this.el = ref}>
