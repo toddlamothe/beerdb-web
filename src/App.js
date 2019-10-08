@@ -15,7 +15,7 @@ class App extends React.Component {
     this.state = {
       isSearchPanelOpen : false,
       isInfoPanelOpen : false,
-      breweries : [
+      breweryMarkerCoords : [
         { "lat" : 39.8283, "lng" : -88.5795 }
       ]
     };
@@ -43,6 +43,9 @@ class App extends React.Component {
     console.log("[searchBreweriesByCriteria]");
       var city, state, zip;
       // Clear map
+      this.setState({
+        breweryMarkerCoords : []
+      })
       // window.map.clearOverlays();
 
       // hideInfoPanel();
@@ -58,6 +61,7 @@ class App extends React.Component {
       
       this.fetchBreweries(city, state, zip, (breweries) => {
         console.log("[fetchBreweries callback]");
+        // console.log("breweries = ", breweries);
         // Show breweries on the map
         this.showBreweries(breweries);
       });
@@ -68,6 +72,7 @@ class App extends React.Component {
     var apiKey = "PI9U8B6hNg3Kb80alaGgx4JqzWpd7Sjn14ObVXzb"; //x-api-key
     var breweries;
     console.log("[fetchBreweries]");
+    this.toggleSearchPanel();
 
     fetch(baseUrl, {
       method: 'GET',
@@ -76,74 +81,44 @@ class App extends React.Component {
         "x-api-key" : apiKey
       },
     })
-        .then(res => res.json())
-        .then((data) => {
-          this.toggleSearchPanel();
-          if (data.totalResults && data.totalResults > 0) {
-            breweries = data.data.map((brewery) => {
-                console.log("brewery map function");
-                return {
-                    "name" : brewery.brewery.name,
-                    "id" : brewery.breweryId,
-                    "description" : brewery.brewery.description,
-                    "url" : brewery.brewery.website,
-                    "coords" : {
-                        "lat" : brewery.latitude,
-                        "lng" : brewery.longitude
-                    },
-                    "images" : brewery.brewery.images
-                }
-            });
-            console.log("breweries = ", breweries);
-            callback(breweries);          
-          }
-          else {
-            console.log("search returned no results");
-          }
-        })
-        .catch(console.log)
-
-    // $.ajax({
-    //     type: 'GET',
-    //     url: baseUrl,
-    //     crossDomain: true,
-    //     headers: { "x-api-key": apiKey },
-    //     contentType: 'application/json'
-    // })
-    // .done(function(data) {
-    //   console.log("totalResults: ", data.totalResults);
-    //   if (data.totalResults > 0) {
-    //       // Map breweries to usable data set
-    //       breweries = data.data.map((brewery) => {
-    //           console.log("brewery map function");
-    //           return {
-    //               "name" : brewery.brewery.name,
-    //               "id" : brewery.breweryId,
-    //               "description" : brewery.brewery.description,
-    //               "url" : brewery.brewery.website,
-    //               "coords" : {
-    //                   "lat" : brewery.latitude,
-    //                   "lng" : brewery.longitude
-    //               },
-    //               "images" : brewery.brewery.images
-    //           }
-    //       });
-    //       callback(breweries);
-    //   }
-    //   else {
-    //       // No results
-    //   }
-    //   hideSpinner();
-    // });
+      .then(res => res.json())
+      .then((data) => {
+        if (data.totalResults && data.totalResults > 0) {
+          breweries = data.data.map((brewery) => {
+              return {
+                  "name" : brewery.brewery.name,
+                  "id" : brewery.breweryId,
+                  "description" : brewery.brewery.description,
+                  "url" : brewery.brewery.website,
+                  "coords" : {
+                      "lat" : brewery.latitude,
+                      "lng" : brewery.longitude
+                  },
+                  "images" : brewery.brewery.images
+              }
+          });
+          console.log("breweries = ", breweries);
+          callback(breweries);          
+        }
+        else {
+          console.log("search returned no results");
+        }
+      })
+      .catch(console.log)
   };
 
   showBreweries(breweries) {
     console.log("[showBreweries]");
+    var breweryMarkerCoords = breweries.map( (brewery) => {
+      // console.log("brewery coord map function");
+      return {
+        "lat" : brewery.coords.lat,
+        "lng" : brewery.coords.lng
+      }      
+    }); 
+    // console.log("breweryMarkerCoords = ", breweryMarkerCoords);
     this.setState( {
-      breweries : [
-        { "lat" : 39.8283, "lng" : -98.5795 },
-        { "lat" : 39.8283, "lng" : -88.5795 }
-      ]      
+      breweryMarkerCoords : breweryMarkerCoords
     });
   }
   
@@ -171,8 +146,7 @@ class App extends React.Component {
           </nav>
           <BeerMap
             isMarkerShown
-            breweries={this.state.breweries}
-           />}
+            breweries={this.state.breweryMarkerCoords}
           />
           
           <div ref={ref => this.el = ref}>

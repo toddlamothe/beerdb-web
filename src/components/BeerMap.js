@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import { withScriptjs, withGoogleMap, GoogleMap, Marker } from "react-google-maps";
+import { useState, Fragment } from "react";
+import ReactDOM from "react-dom";
 
 const Map = withScriptjs(
   withGoogleMap(props => (
@@ -33,8 +35,6 @@ class BeerMap extends React.Component {
 
   render() {
     return (
-      <div>
-          <button onClick={this.deleteMark}>DELETE MARKS</button>
           <Map
               googleMapURL="http://maps.googleapis.com/maps/api/js?key=AIzaSyB8XchO4u2Ig273475Zl1RImvskWNZDEOw"
               loadingElement={<div style={{ height: `100%` }} />}
@@ -42,10 +42,11 @@ class BeerMap extends React.Component {
               mapElement={<div style={{ height: `100%` }} />}
               onMapClick={this.setMark}
               breweries={this.props.breweries}
-          />;
-      </div>
-    );
-  }
+              ref={(ref) => { this.map = ref; }}
+          />
+        )
+    }
+
 }
 
 export default BeerMap;
