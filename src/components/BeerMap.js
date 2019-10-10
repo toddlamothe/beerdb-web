@@ -34,19 +34,32 @@ class BeerMap extends React.Component {
   };
 
   render() {
+    console.log("[render]");
     return (
-          <Map
-              googleMapURL="http://maps.googleapis.com/maps/api/js?key=AIzaSyB8XchO4u2Ig273475Zl1RImvskWNZDEOw"
-              loadingElement={<div style={{ height: `100%` }} />}
-              containerElement={<div style={{ height: `100vh` }} />}
-              mapElement={<div style={{ height: `100%` }} />}
-              onMapClick={this.setMark}
-              breweries={this.props.breweries}
-              ref={(ref) => { this.map = ref; }}
-          />
-        )
+        <Map
+          googleMapURL="http://maps.googleapis.com/maps/api/js?key=AIzaSyB8XchO4u2Ig273475Zl1RImvskWNZDEOw"
+          loadingElement={<div style={{ height: `100%` }} />}
+          containerElement={<div style={{ height: `100vh` }} />}
+          mapElement={<div style={{ height: `100%` }} />}
+          onMapClick={this.setMark}
+          breweries={this.props.breweries}
+        />
+      )
     }
 
+    componentDidMount() {
+      console.log("[componentDidMount]");
+    }
+    
+    componentDidUpdate() {
+      console.log("[componentDidUpdate]");
+      const bounds = new window.google.maps.LatLngBounds();
+      const coordinates = this.props.breweries.map(brewery => {
+        const latLng = new window.google.maps.LatLng(brewery.lat, brewery.lng);
+        bounds.extend(latLng);
+        return latLng;
+      });      
+    }
 }
 
 export default BeerMap;
