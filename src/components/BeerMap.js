@@ -1,31 +1,34 @@
-import React, { Component } from "react";
-
-class BeerMap extends React.Component {
-  constructor(props) {
-    super(props);
-    console.log("props.breweries = ", props.breweries);
+import React, { Component } from 'react';
+import GoogleMapReact from 'google-map-react';
+ 
+const AnyReactComponent = ({ text }) => <div>{text}</div>;
+ 
+class BeerMap extends Component {
+  static defaultProps = {
+    center: {
+      lat: 59.95,
+      lng: 30.33
+    },
+    zoom: 11
   };
-
+ 
   render() {
-    console.log("[render]");
     return (
-      <div>I'm a map!</div>
-      )
-    }
-
-    componentDidMount() {
-      console.log("[componentDidMount]");
-    }
-    
-    componentDidUpdate() {
-      console.log("[componentDidUpdate]");
-      // const bounds = new window.google.maps.LatLngBounds();
-      // const coordinates = this.props.breweries.map(brewery => {
-      //   const latLng = new window.google.maps.LatLng(brewery.lat, brewery.lng);
-      //   bounds.extend(latLng);
-      //   return latLng;
-      // });      
-    }
+      <div style={{ height: '100vh', width: '100%' }}>
+        <GoogleMapReact
+          bootstrapURLKeys={{ key: "AIzaSyB8XchO4u2Ig273475Zl1RImvskWNZDEOw" }}
+          defaultCenter={this.props.center}
+          defaultZoom={this.props.zoom}
+        >
+          <AnyReactComponent
+            lat={59.955413}
+            lng={30.337844}
+            text="My Marker"
+          />
+        </GoogleMapReact>
+      </div>
+    );
+  }
 }
-
+ 
 export default BeerMap;
