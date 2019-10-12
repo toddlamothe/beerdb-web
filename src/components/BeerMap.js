@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import GoogleMapReact from 'google-map-react';
  
-const AnyReactComponent = ({ text }) => <div>{text}</div>;
- 
 class BeerMap extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      breweries : props.breweries
+    }
+    this.onGoogleApiLoaded = this.onGoogleApiLoaded.bind(this);
     this.renderMarkers = this.renderMarkers.bind(this);
-    this.handleApiLoaded = this.handleApiLoaded.bind(this);
   }
   
   static defaultProps = {
@@ -18,26 +19,42 @@ class BeerMap extends Component {
     zoom: 3
   };
   
-  renderMarkers() {
-    // return (
-    //   <BreweryMarker />
-    // )
+  onGoogleApiLoaded(map, maps) {
+    console.log("[onGoogleApiLoaded]");
+    this.setState( {
+      map : map,
+      maps : maps
+    })
+    this.renderMarkers(map, maps);
   }
-
-  handleApiLoaded(map, maps) {
-    // use map and maps objects
-    console.log("[handleApiLoaded]");
-    var image = '../images/Icon-Small-40.png';
-    let marker = new maps.Marker({
-      position: this.props.center,
-      map,
-      title: 'Hello World!',
-      icon: require("../images/Icon-Small-40.png")
-    });
+  
+  renderMarkers() {
+    console.log("[renderMarkers]");
+    var map = this.state.map;
+    if (!(this.state.map && this.state.maps)) {
+      console.log("GoogleApi not loaded");
+      return;
+    }
+    
+    if (this.props.breweries) {
+      // console.log("this.props.breweries = ", this.props.breweries);
+      const bounds = new window.google.maps.LatLngBounds();
+      this.props.breweries.map( (brewery) => {
+        bounds.extend(brewery.coords)
+        new this.state.maps.Marker({
+          position: brewery.coords,
+          map,
+          title: 'Hello World!',
+          icon: require("../images/Icon-Small-40.png")
+        });
+        map.fitBounds(bounds);
+      })
+    }
   }; 
 
-
   render() {
+    console.log("[render BeerMap]");
+    this.renderMarkers()
     return (
       <div style={{ height: '100vh', width: '100%' }}>
         <GoogleMapReact
@@ -45,20 +62,12 @@ class BeerMap extends Component {
           defaultCenter={this.props.center}
           defaultZoom={this.props.zoom}
           yesIWantToUseGoogleMapApiInternals
-          onGoogleApiLoaded={({ map, maps }) => this.handleApiLoaded(map, maps)}
+          onGoogleApiLoaded={({ map, maps }) => this.onGoogleApiLoaded(map, maps)}
         >
-        {this.renderMarkers()}
         </GoogleMapReact>
       </div>
     );
   }
-  // {renderMarkers()}
-  // <AnyReactComponent
-  //     lat={39.955413}
-  //     lng={-98.5795}
-  //     text="<<MY MARKER>>"
-  //   />
-
 }
  
 export default BeerMap;

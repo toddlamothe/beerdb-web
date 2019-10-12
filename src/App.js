@@ -46,12 +46,6 @@ class App extends React.Component {
       this.setState({
         breweryMarkerCoords : []
       })
-      // window.map.clearOverlays();
-
-      // hideInfoPanel();
-      // hideInputValidationError();
-      // showSpinner();
-      
       searchCriteria.city ? city = searchCriteria.city : city = "";
       searchCriteria.state ? state = searchCriteria.state : state = "";
       searchCriteria.zip ? zip = searchCriteria.zip : state = "";
@@ -61,9 +55,9 @@ class App extends React.Component {
       
       this.fetchBreweries(city, state, zip, (breweries) => {
         console.log("[fetchBreweries callback]");
-        // console.log("breweries = ", breweries);
-        // Show breweries on the map
-        this.showBreweries(breweries);
+        this.setState( {
+          breweries : breweries
+        });
       });
   };
   
@@ -97,7 +91,7 @@ class App extends React.Component {
                   "images" : brewery.brewery.images
               }
           });
-          console.log("breweries = ", breweries);
+          // console.log("breweries = ", breweries);
           callback(breweries);          
         }
         else {
@@ -107,21 +101,6 @@ class App extends React.Component {
       .catch(console.log)
   };
 
-  showBreweries(breweries) {
-    console.log("[showBreweries]");
-    var breweryMarkerCoords = breweries.map( (brewery) => {
-      // console.log("brewery coord map function");
-      return {
-        "lat" : brewery.coords.lat,
-        "lng" : brewery.coords.lng
-      }      
-    }); 
-    // console.log("breweryMarkerCoords = ", breweryMarkerCoords);
-    this.setState( {
-      breweryMarkerCoords : breweryMarkerCoords
-    });
-  }
-  
   render() {
       return ( 
         <div className="App">
@@ -146,7 +125,7 @@ class App extends React.Component {
           </nav>
           <BeerMap
             isMarkerShown
-            breweries={this.state.breweryMarkerCoords}
+            breweries={this.state.breweries}
           />
           
           <div ref={ref => this.el = ref}>
