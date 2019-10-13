@@ -9,6 +9,7 @@ class BeerMap extends Component {
     }
     this.onGoogleApiLoaded = this.onGoogleApiLoaded.bind(this);
     this.renderMarkers = this.renderMarkers.bind(this);
+    this.onMarkerClick = this.onMarkerClick.bind(this);
   }
   
   static defaultProps = {
@@ -28,6 +29,10 @@ class BeerMap extends Component {
     this.renderMarkers(map, maps);
   }
   
+  onMarkerClick() {
+    console.log("[onMarkerClick]");
+  }
+  
   renderMarkers() {
     console.log("[renderMarkers]");
     var map = this.state.map;
@@ -37,16 +42,27 @@ class BeerMap extends Component {
     }
     
     if (this.props.breweries) {
+      var breweryMarker;
+      var breweryId;
+
       // console.log("this.props.breweries = ", this.props.breweries);
       const bounds = new window.google.maps.LatLngBounds();
       this.props.breweries.map( (brewery) => {
         bounds.extend(brewery.coords)
-        new this.state.maps.Marker({
+        breweryMarker = new this.state.maps.Marker({
           position: brewery.coords,
           map,
           title: 'Hello World!',
-          icon: require("../images/Icon-Small-40.png")
+          snippet: "Population: 4,137,400",
+          icon: require("../images/Icon-Small-40.png"),
         });
+        
+        breweryMarker.addListener('click', function() {
+          console.log("[breweryMarker.click]");
+          breweryId = brewery.id;
+          console.log("breweryId = ", breweryId);
+        });
+        
         map.fitBounds(bounds);
       })
     }
