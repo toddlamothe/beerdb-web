@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 import GoogleMapReact from 'google-map-react';
- 
+
 class BeerMap extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      breweries : props.breweries
-    }
+      breweries : props.breweries,
+      markerClickHandler : props.onBreweryClick
+    }    
+    
     this.onGoogleApiLoaded = this.onGoogleApiLoaded.bind(this);
     this.renderMarkers = this.renderMarkers.bind(this);
     this.onMarkerClick = this.onMarkerClick.bind(this);
@@ -26,14 +28,11 @@ class BeerMap extends Component {
       map : map,
       maps : maps
     })
+
     this.renderMarkers(map, maps);
   }
   
-  onMarkerClick() {
-    console.log("[onMarkerClick]");
-  }
-  
-  renderMarkers() {
+  renderMarkers(clickHandler) {
     console.log("[renderMarkers]");
     var map = this.state.map;
     if (!(this.state.map && this.state.maps)) {
@@ -61,6 +60,7 @@ class BeerMap extends Component {
           console.log("[breweryMarker.click]");
           breweryId = brewery.id;
           console.log("breweryId = ", breweryId);
+          clickHandler(breweryId);
         });
         
         map.fitBounds(bounds);
@@ -68,9 +68,15 @@ class BeerMap extends Component {
     }
   }; 
 
+  onMarkerClick(breweryId) {
+    console.log("[onMarkerClick]");
+    // Call parent click handler
+    this.state.markerClickHandler(breweryId);
+  }
+
   render() {
     console.log("[render BeerMap]");
-    this.renderMarkers()
+    this.renderMarkers(this.onMarkerClick)
     return (
       <div style={{ height: '100vh', width: '100%' }}>
         <GoogleMapReact

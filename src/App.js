@@ -20,7 +20,9 @@ class App extends React.Component {
       ]
     };
     
+    this.breweryMarkerClickHandler = this.breweryMarkerClickHandler.bind(this);
     this.onSearchSubmitted = this.onSearchSubmitted.bind(this);
+    this.showBreweryInfoPanel = this.showBreweryInfoPanel.bind(this);
   };
   
   componentDidMount() {
@@ -100,6 +102,15 @@ class App extends React.Component {
       })
       .catch(console.log)
   };
+  
+  breweryMarkerClickHandler(breweryId) {
+    console.log("[breweryMarkerClickHandler]");
+    this.showBreweryInfoPanel(breweryId);
+  }
+  
+  showBreweryInfoPanel(breweryId) {
+      console.log("[showBreweryInfoPanel]");
+  }
 
   render() {
       return ( 
@@ -126,6 +137,7 @@ class App extends React.Component {
           <BeerMap
             isMarkerShown
             breweries={this.state.breweries}
+            onBreweryClick={this.breweryMarkerClickHandler}
           />
           
           <div ref={ref => this.el = ref}>
