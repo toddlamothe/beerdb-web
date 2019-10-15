@@ -1,7 +1,8 @@
 import React from 'react';
 import logo from './logo.svg';
 import BeerMap from './components/BeerMap';
-import BeerSearchForm from './components/BeerSearchForm'
+import BeerSearchForm from './components/BeerSearchForm';
+import BreweryInfo from './components/BreweryInfo';
 import Modal from 'react-modal';
 import SlidingPane from 'react-sliding-pane';
 import 'react-sliding-pane/dist/react-sliding-pane.css';
@@ -15,6 +16,7 @@ class App extends React.Component {
     this.state = {
       isSearchPanelOpen : false,
       isInfoPanelOpen : false,
+      infoPanelBreweryId : "",
       breweryMarkerCoords : [
         { "lat" : 39.8283, "lng" : -88.5795 }
       ]
@@ -110,6 +112,11 @@ class App extends React.Component {
   
   showBreweryInfoPanel(breweryId) {
       console.log("[showBreweryInfoPanel]");
+      console.log("breweryId = ", breweryId);
+      this.setState( {
+        isInfoPanelOpen : true,
+        infoPanelBreweryId : breweryId
+      })
   }
 
   render() {
@@ -160,8 +167,12 @@ class App extends React.Component {
                 // title='BOTTOM PANE'
                 from='bottom'
                 width='100%'
-                onRequestClose={ () => this.setState({ isInfoPanelOpen: false }) }>
-                <div>Info Panel Content Here</div>
+                onRequestClose={ () => this.setState({ isInfoPanelOpen: false }) }                
+                >
+                <BreweryInfo 
+                breweryId={this.state.infoPanelBreweryId}
+                />
+                
             </SlidingPane>
           </div>
         </div>
