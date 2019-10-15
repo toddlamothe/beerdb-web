@@ -17,6 +17,9 @@ class App extends React.Component {
       isSearchPanelOpen : false,
       isInfoPanelOpen : false,
       infoPanelBreweryId : "",
+      infoPanelBreweryName : "Coors",
+      infoPanelBreweryDescription : "Coors Brewing Company",
+      infoPanelBreweryLogo : "",
       breweryMarkerCoords : [
         { "lat" : 39.8283, "lng" : -88.5795 }
       ]
@@ -113,9 +116,19 @@ class App extends React.Component {
   showBreweryInfoPanel(breweryId) {
       console.log("[showBreweryInfoPanel]");
       console.log("breweryId = ", breweryId);
+      console.log("this.state.breweries = ", this.state.breweries);
+      var infoPanelBrewery = this.state.breweries.find( (brewery) => {
+        return brewery.id === breweryId;
+      })
+      if (!infoPanelBrewery) return;
+
+      // console.log("found the brewery! ", infoPanelBrewery);      
       this.setState( {
         isInfoPanelOpen : true,
-        infoPanelBreweryId : breweryId
+        infoPanelBreweryId : infoPanelBrewery.id,
+        infoPanelBreweryName : infoPanelBrewery.name,
+        infoPanelBreweryDescription : infoPanelBrewery.description,
+        infoPanelBreweryLogo : (infoPanelBrewery.images ? infoPanelBrewery.images.icon : "")
       })
   }
 
@@ -162,7 +175,8 @@ class App extends React.Component {
                   onSearchSubmitted={this.onSearchSubmitted} />
             </SlidingPane>
             <SlidingPane
-                closeIcon={<div>BREWERY NAME HERE</div>}
+                title={this.state.infoPanelBreweryName}
+                closeIcon=<img src={this.state.infoPanelBreweryLogo} />
                 isOpen={ this.state.isInfoPanelOpen }
                 // title='BOTTOM PANE'
                 from='bottom'
@@ -170,7 +184,10 @@ class App extends React.Component {
                 onRequestClose={ () => this.setState({ isInfoPanelOpen: false }) }                
                 >
                 <BreweryInfo 
-                breweryId={this.state.infoPanelBreweryId}
+                  breweryId={this.state.infoPanelBreweryId}
+                  breweryName={this.state.infoPanelBreweryName}
+                  breweryDescription={this.state.infoPanelBreweryDescription}
+                  breweryLogo={this.state.infoPanelBreweryLogo}
                 />
                 
             </SlidingPane>

@@ -4,13 +4,20 @@ class BreweryInfo extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      breweryId : props.breweryId
+      breweryId : props.breweryId,
+      breweryName : props.breweryName,
+      breweryDescription : props.breweryDescription,
+      breweryLogo : props.breweryLogo
     }
   }
   
   render() {
     return (
-      <div>{this.state.breweryId}</div>
+      <div>
+        <small>
+          {this.state.breweryDescription} <br/>
+        </small>
+      </div>
     )
   }
 }
