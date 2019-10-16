@@ -78,7 +78,7 @@ class BeerMap extends Component {
     console.log("[render BeerMap]");
     this.renderMarkers(this.onMarkerClick)
     return (
-      <div style={{ height: '100vh', width: '100%' }}>
+      <div style={{ height: '95vh', width: '100%' }}>
         <GoogleMapReact
           bootstrapURLKeys={{ key: "AIzaSyB8XchO4u2Ig273475Zl1RImvskWNZDEOw" }}
           defaultCenter={this.props.center}

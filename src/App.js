@@ -137,9 +137,7 @@ class App extends React.Component {
         <div className="App">
           <nav className="navbar navbar-light">
             <div>
-                <button onClick={ () => this.setState({ isInfoPanelOpen: true }) }>
-                    Open Bottom Panel
-                </button>
+              BeerDb
             </div>
 
           <HamburgerMenu
