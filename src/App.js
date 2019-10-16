@@ -55,7 +55,7 @@ class App extends React.Component {
       })
       searchCriteria.city ? city = searchCriteria.city : city = "";
       searchCriteria.state ? state = searchCriteria.state : state = "";
-      searchCriteria.zip ? zip = searchCriteria.zip : state = "";
+      searchCriteria.zip ? zip = searchCriteria.zip : zip = "";
       console.log("city = ", city);
       console.log("state = ", state);
       console.log("zip = ", zip);
@@ -73,6 +73,7 @@ class App extends React.Component {
     var apiKey = "PI9U8B6hNg3Kb80alaGgx4JqzWpd7Sjn14ObVXzb"; //x-api-key
     var breweries;
     console.log("[fetchBreweries]");
+    console.log("url = ", baseUrl);
     this.toggleSearchPanel();
 
     fetch(baseUrl, {
@@ -115,8 +116,6 @@ class App extends React.Component {
   
   showBreweryInfoPanel(breweryId) {
       console.log("[showBreweryInfoPanel]");
-      console.log("breweryId = ", breweryId);
-      console.log("this.state.breweries = ", this.state.breweries);
       var infoPanelBrewery = this.state.breweries.find( (brewery) => {
         return brewery.id === breweryId;
       })
