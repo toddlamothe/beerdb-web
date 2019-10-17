@@ -15,14 +15,10 @@ class App extends React.Component {
     super(props);
     this.state = {
       isSearchPanelOpen : false,
+      infoPanelBrewery : {
+        "name" : ""
+      },
       isInfoPanelOpen : false,
-      infoPanelBreweryId : "",
-      infoPanelBreweryName : "Coors",
-      infoPanelBreweryDescription : "Coors Brewing Company",
-      infoPanelBreweryLogo : "",
-      breweryMarkerCoords : [
-        { "lat" : 39.8283, "lng" : -88.5795 }
-      ]
     };
     
     this.breweryMarkerClickHandler = this.breweryMarkerClickHandler.bind(this);
@@ -49,10 +45,6 @@ class App extends React.Component {
   searchBreweriesByCriteria(searchCriteria) {
     console.log("[searchBreweriesByCriteria]");
       var city, state, zip;
-      // Clear map
-      this.setState({
-        breweryMarkerCoords : []
-      })
       searchCriteria.city ? city = searchCriteria.city : city = "";
       searchCriteria.state ? state = searchCriteria.state : state = "";
       searchCriteria.zip ? zip = searchCriteria.zip : zip = "";
@@ -124,10 +116,7 @@ class App extends React.Component {
       // console.log("found the brewery! ", infoPanelBrewery);      
       this.setState( {
         isInfoPanelOpen : true,
-        infoPanelBreweryId : infoPanelBrewery.id,
-        infoPanelBreweryName : infoPanelBrewery.name,
-        infoPanelBreweryDescription : infoPanelBrewery.description,
-        infoPanelBreweryLogo : (infoPanelBrewery.images ? infoPanelBrewery.images.icon : "")
+        infoPanelBrewery : infoPanelBrewery,
       })
   }
 
@@ -172,8 +161,8 @@ class App extends React.Component {
                   onSearchSubmitted={this.onSearchSubmitted} />
             </SlidingPane>
             <SlidingPane
-                title={this.state.infoPanelBreweryName}
-                closeIcon=<img src={this.state.infoPanelBreweryLogo} />
+                title={this.state.infoPanelBrewery.name}
+                closeIcon=<img src={this.state.infoPanelBrewery.images ? this.state.infoPanelBrewery.images.icon : ""} />
                 isOpen={ this.state.isInfoPanelOpen }
                 // title='BOTTOM PANE'
                 from='bottom'
@@ -181,10 +170,7 @@ class App extends React.Component {
                 onRequestClose={ () => this.setState({ isInfoPanelOpen: false }) }                
                 >
                 <BreweryInfo 
-                  breweryId={this.state.infoPanelBreweryId}
-                  breweryName={this.state.infoPanelBreweryName}
-                  breweryDescription={this.state.infoPanelBreweryDescription}
-                  breweryLogo={this.state.infoPanelBreweryLogo}
+                  brewery = {this.state.infoPanelBrewery}
                 />
                 
             </SlidingPane>

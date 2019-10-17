@@ -31,7 +31,19 @@ class BeerMap extends Component {
 
     this.renderMarkers(map, maps);
   }
-  
+
+  // componentDidUpdate(prevProps, prevState) {
+  //   console.log("[componentDidUpdate]");
+  //   Object.entries(this.props).forEach(([key, val]) =>
+  //     prevProps[key] !== val && console.log(`Prop '${key}' changed`)
+  //   );
+  //   if (this.state) {
+  //     Object.entries(this.state).forEach(([key, val]) =>
+  //       prevState[key] !== val && console.log(`State '${key}' changed`)
+  //     );
+  //   }
+  // }
+    
   renderMarkers(clickHandler) {
     console.log("[renderMarkers]");
     var map = this.state.map;
