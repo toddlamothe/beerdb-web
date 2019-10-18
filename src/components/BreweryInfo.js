@@ -16,9 +16,9 @@ class BreweryInfo extends React.Component {
   render() {
     return (
       <div>
-        <div className="brewery-search-directions">
+        <div class="brewery-search-directions">
             <a target="#" href={this.state.breweryDirectionsMapUrl}>
-              <img width="40" height="40" src={require("../images/search_marker.jpg")} />
+              <img width="40" height="40" src={require("../images/e2c92dcca549e10c8ecf8049fddda317.webp")} />
             </a>
         </div>
         <div>
