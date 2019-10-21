@@ -25,13 +25,14 @@ class BeerSearchForm extends React.Component {
     this.handleBrewerySearch = this.handleBrewerySearch.bind(this);
   }
   
-  handleBrewerySearch() {
+  handleBrewerySearch(e) {
+    e.preventDefault();
     if(!this.searchCriteriaIsValid(this.state)) {
         console.error("Invalid search criteria")
         this.setState({
           showInvalidCriteriaError : true
         });
-        return;
+        return false;
     };
 
     this.setState({
@@ -84,7 +85,7 @@ class BeerSearchForm extends React.Component {
           </Col>
         </Row>
         <Row>
-          <Col>
+          <Col>          
             <Form>
               <Form.Group controlId="city">
                 <Form.Label>City</Form.Label>
@@ -113,9 +114,9 @@ class BeerSearchForm extends React.Component {
                   onChange={this.handleChangeZip}
                   />
               </Form.Group>
-              <Button variant="primary" onClick={() => this.handleBrewerySearch()}>Search</Button>&nbsp;
-              <Button variant="primary" type="submit">Near Me</Button>
-            </Form>
+              <Button variant="primary" type="submit" onClick={(e) => this.handleBrewerySearch(e)}>Search</Button>&nbsp;
+              <Button variant="primary">Near Me</Button>
+            </Form>              
           </Col>
         </Row>
         </Container>
@@ -125,3 +126,5 @@ class BeerSearchForm extends React.Component {
 }
 
 export default BeerSearchForm
+
+
