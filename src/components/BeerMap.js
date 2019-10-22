@@ -6,21 +6,15 @@ class BeerMap extends Component {
     super(props);
     this.state = {
       breweries : props.breweries,
-      markerClickHandler : props.onBreweryClick
+      markerClickHandler : props.onBreweryClick,
+      center : props.center,
+      zoom : 3
     }    
     
     this.onGoogleApiLoaded = this.onGoogleApiLoaded.bind(this);
     this.renderMarkers = this.renderMarkers.bind(this);
     this.onMarkerClick = this.onMarkerClick.bind(this);
   }
-  
-  static defaultProps = {
-    center: {
-      lat: 39.8283,
-      lng: -98.5795
-    },
-    zoom: 3
-  };
   
   onGoogleApiLoaded(map, maps) {
     console.log("[onGoogleApiLoaded]");
@@ -31,18 +25,6 @@ class BeerMap extends Component {
 
     this.renderMarkers(map, maps);
   }
-
-  // componentDidUpdate(prevProps, prevState) {
-  //   console.log("[componentDidUpdate]");
-  //   Object.entries(this.props).forEach(([key, val]) =>
-  //     prevProps[key] !== val && console.log(`Prop '${key}' changed`)
-  //   );
-  //   if (this.state) {
-  //     Object.entries(this.state).forEach(([key, val]) =>
-  //       prevState[key] !== val && console.log(`State '${key}' changed`)
-  //     );
-  //   }
-  // }
     
   renderMarkers(clickHandler) {
     console.log("[renderMarkers]");
@@ -93,8 +75,8 @@ class BeerMap extends Component {
       <div style={{ height: '95vh', width: '100%' }}>
         <GoogleMapReact
           bootstrapURLKeys={{ key: "AIzaSyB8XchO4u2Ig273475Zl1RImvskWNZDEOw" }}
-          defaultCenter={this.props.center}
-          defaultZoom={this.props.zoom}
+          defaultCenter={this.state.center}
+          defaultZoom={this.state.zoom}
           yesIWantToUseGoogleMapApiInternals
           onGoogleApiLoaded={({ map, maps }) => this.onGoogleApiLoaded(map, maps)}
         >

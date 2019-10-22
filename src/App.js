@@ -19,6 +19,10 @@ class App extends React.Component {
         "name" : ""
       },
       isInfoPanelOpen : false,
+      defaultMapCenter : {
+        lat: 39.8283,
+        lng: -98.5795        
+      }
     };
     
     this.breweryMarkerClickHandler = this.breweryMarkerClickHandler.bind(this);
@@ -144,6 +148,7 @@ class App extends React.Component {
             isMarkerShown
             breweries={this.state.breweries}
             onBreweryClick={this.breweryMarkerClickHandler}
+            center={this.state.defaultMapCenter}
           />
           
           <div ref={ref => this.el = ref}>
