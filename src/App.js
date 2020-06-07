@@ -14,7 +14,7 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      isSearchPanelOpen : false,
+      isSearchPanelOpen : true,
       infoPanelBrewery : {
         "name" : ""
       },
@@ -41,23 +41,16 @@ class App extends React.Component {
   };
   
   onSearchSubmitted(searchCriteria) {
-    console.log("[App.js-> onSearchSubmitted]");
-    console.log("searchCriteria = ", searchCriteria);
     this.searchBreweriesByCriteria(searchCriteria);
   };
   
   searchBreweriesByCriteria(searchCriteria) {
-    console.log("[searchBreweriesByCriteria]");
       var city, state, zip;
       searchCriteria.city ? city = searchCriteria.city : city = "";
       searchCriteria.state ? state = searchCriteria.state : state = "";
       searchCriteria.zip ? zip = searchCriteria.zip : zip = "";
-      console.log("city = ", city);
-      console.log("state = ", state);
-      console.log("zip = ", zip);
       
       this.fetchBreweries(city, state, zip, (breweries) => {
-        console.log("[fetchBreweries callback]");
         this.setState( {
           breweries : breweries
         });
@@ -68,8 +61,6 @@ class App extends React.Component {
     var baseUrl = " https://yxnbc1dm5e.execute-api.us-east-1.amazonaws.com/dev/breweries?postalCode=" + zip + "&city=" + city + "&state=" + state;
     var apiKey = "PI9U8B6hNg3Kb80alaGgx4JqzWpd7Sjn14ObVXzb"; //x-api-key
     var breweries;
-    console.log("[fetchBreweries]");
-    console.log("url = ", baseUrl);
     this.toggleSearchPanel();
 
     fetch(baseUrl, {
@@ -95,7 +86,6 @@ class App extends React.Component {
                   "images" : brewery.brewery.images
               }
           });
-          // console.log("breweries = ", breweries);
           callback(breweries);          
         }
         else {
@@ -106,18 +96,15 @@ class App extends React.Component {
   };
   
   breweryMarkerClickHandler(breweryId) {
-    console.log("[breweryMarkerClickHandler]");
     this.showBreweryInfoPanel(breweryId);
   }
   
   showBreweryInfoPanel(breweryId) {
-      console.log("[showBreweryInfoPanel]");
       var infoPanelBrewery = this.state.breweries.find( (brewery) => {
         return brewery.id === breweryId;
       })
       if (!infoPanelBrewery) return;
 
-      // console.log("found the brewery! ", infoPanelBrewery);      
       this.setState( {
         isInfoPanelOpen : true,
         infoPanelBrewery : infoPanelBrewery,
@@ -153,7 +140,7 @@ class App extends React.Component {
           
           <div ref={ref => this.el = ref}>
             <SlidingPane
-                className='some-custom-class'
+                className='search-panel'
                 overlayClassName='some-custom-overlay-class'
                 isOpen={ this.state.isSearchPanelOpen }
                 title='Brewery Search'

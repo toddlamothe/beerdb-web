@@ -4,7 +4,6 @@ import './BreweryInfo.css';
 class BreweryInfo extends React.Component {
   constructor(props) {
     super(props);
-    console.log("props = ", props);
     var mapUrlBase = "https://www.google.com/maps/dir/?api=1&origin=&destination=";
     var mapUrl = mapUrlBase + props.brewery.coords.lat + ", " + props.brewery.coords.lng;
     this.state = {

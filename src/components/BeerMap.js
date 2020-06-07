@@ -17,7 +17,6 @@ class BeerMap extends Component {
   }
   
   onGoogleApiLoaded(map, maps) {
-    console.log("[onGoogleApiLoaded]");
     this.setState( {
       map : map,
       maps : maps
@@ -27,7 +26,6 @@ class BeerMap extends Component {
   }
     
   renderMarkers(clickHandler) {
-    console.log("[renderMarkers]");
     var map = this.state.map;
     if (!(this.state.map && this.state.maps)) {
       console.log("GoogleApi not loaded");
@@ -38,7 +36,6 @@ class BeerMap extends Component {
       var breweryMarker;
       var breweryId;
 
-      // console.log("this.props.breweries = ", this.props.breweries);
       const bounds = new window.google.maps.LatLngBounds();
       this.props.breweries.map( (brewery) => {
         bounds.extend(brewery.coords)
@@ -51,9 +48,7 @@ class BeerMap extends Component {
         });
         
         breweryMarker.addListener('click', function() {
-          console.log("[breweryMarker.click]");
           breweryId = brewery.id;
-          console.log("breweryId = ", breweryId);
           clickHandler(breweryId);
         });
         
@@ -63,13 +58,11 @@ class BeerMap extends Component {
   }; 
 
   onMarkerClick(breweryId) {
-    console.log("[onMarkerClick]");
     // Call parent click handler
     this.state.markerClickHandler(breweryId);
   }
 
   render() {
-    console.log("[render BeerMap]");
     this.renderMarkers(this.onMarkerClick)
     return (
       <div style={{ height: '95vh', width: '100%' }}>

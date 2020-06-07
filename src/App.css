@@ -12,6 +12,10 @@ body {
  position: absolute;
 }
 
+.search-panel {
+    width:100px;
+}
+
 .App {
   text-align: center;
 }
