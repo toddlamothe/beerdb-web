@@ -28,7 +28,7 @@ class BeerMap extends Component {
   renderMarkers(clickHandler) {
     var map = this.state.map;
     if (!(this.state.map && this.state.maps)) {
-      console.log("GoogleApi not loaded");
+      console.log("GoogleApi not loaded, unable to render markers");
       return;
     }
     
