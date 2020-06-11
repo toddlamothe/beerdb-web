@@ -9,17 +9,6 @@ import 'react-sliding-pane/dist/react-sliding-pane.css';
 import HamburgerMenu from 'react-hamburger-menu';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { setDefaultBreakpoints } from 'react-socks';
-import { Breakpoint, BreakpointProvider } from 'react-socks';
-
-// Define breakpoints for rendering on different viewports
-setDefaultBreakpoints([
-  { xs: 0 },
-  { small: 376 },
-  { medium: 426 },
-  { large: 769 },
-  { xl: 1025 }
-]);
 
 class App extends React.Component {
   constructor(props) {
@@ -150,34 +139,19 @@ class App extends React.Component {
           />
           
           <div ref={ref => this.el = ref}>
-            <BreakpointProvider>
-              <Breakpoint small down>
-                <div>I will render only in mobile devices</div>
-              </Breakpoint>
-
-              <Breakpoint medium only>
-                <div>I will render only in tablets (iPad, etc...)</div>
-              </Breakpoint>
-
-              <Breakpoint large up>
-                <SlidingPane
-                    className='search-panel'
-                    overlayClassName='some-custom-overlay-class'
-                    isOpen={ this.state.isSearchPanelOpen }
-                    title='Brewery Search'
-                    // subtitle='Optional subtitle.'
-                    onRequestClose={ () => {
-                        // triggered on "<" on left top click or on outside click
-                        this.setState({ isSearchPanelOpen: false });
-                    } }>
-                    <BeerSearchForm
-                      onSearchSubmitted={this.onSearchSubmitted} />
-                </SlidingPane>
-              </Breakpoint> 
-            </BreakpointProvider>
-
-
-            
+            <SlidingPane
+                className='search-panel'
+                overlayClassName='search-panel'
+                isOpen={ this.state.isSearchPanelOpen }
+                title='Brewery Search'
+                // subtitle='Optional subtitle.'
+                onRequestClose={ () => {
+                    // triggered on "<" on left top click or on outside click
+                    this.setState({ isSearchPanelOpen: false });
+                } }>
+                <BeerSearchForm
+                  onSearchSubmitted={this.onSearchSubmitted} />
+            </SlidingPane>            
             <SlidingPane
                 title={this.state.infoPanelBrewery.name}
                 closeIcon=<img src={this.state.infoPanelBrewery.images ? this.state.infoPanelBrewery.images.icon : ""} />
