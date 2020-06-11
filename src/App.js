@@ -151,7 +151,7 @@ class App extends React.Component {
                 } }>
                 <BeerSearchForm
                   onSearchSubmitted={this.onSearchSubmitted} />
-            </SlidingPane>            
+            </SlidingPane>
             <SlidingPane
                 title={this.state.infoPanelBrewery.name}
                 closeIcon=<img src={this.state.infoPanelBrewery.images ? this.state.infoPanelBrewery.images.icon : ""} />
@@ -164,7 +164,7 @@ class App extends React.Component {
                 <BreweryInfo 
                   brewery = {this.state.infoPanelBrewery}
                 />                
-            </SlidingPane>         
+            </SlidingPane>
 
           </div>
         </div>
