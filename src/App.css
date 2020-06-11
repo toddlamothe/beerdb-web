@@ -17,6 +17,13 @@ body {
   margin-left: auto;
 }
 
+.brewery-info-panel {
+  position:fixed;
+  bottom: 0px;
+  height: 325px !important;
+  /* margin-top: auto; */
+}
+
 .App {
   text-align: center;
 }

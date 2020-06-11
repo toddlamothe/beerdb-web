@@ -153,6 +153,7 @@ class App extends React.Component {
                   onSearchSubmitted={this.onSearchSubmitted} />
             </SlidingPane>
             <SlidingPane
+                className='brewery-info-panel'
                 title={this.state.infoPanelBrewery.name}
                 closeIcon=<img src={this.state.infoPanelBrewery.images ? this.state.infoPanelBrewery.images.icon : ""} />
                 isOpen={ this.state.isInfoPanelOpen }
