@@ -13,7 +13,8 @@ body {
 }
 
 .search-panel {
-    width:100px;
+  width: 300px !important;
+  margin-left: auto;
 }
 
 .App {

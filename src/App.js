@@ -141,7 +141,7 @@ class App extends React.Component {
           <div ref={ref => this.el = ref}>
             <SlidingPane
                 className='search-panel'
-                overlayClassName='some-custom-overlay-class'
+                overlayClassName='search-panel'
                 isOpen={ this.state.isSearchPanelOpen }
                 title='Brewery Search'
                 // subtitle='Optional subtitle.'
@@ -163,9 +163,9 @@ class App extends React.Component {
                 >
                 <BreweryInfo 
                   brewery = {this.state.infoPanelBrewery}
-                />
-                
+                />                
             </SlidingPane>
+
           </div>
         </div>
     )
