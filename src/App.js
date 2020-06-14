@@ -59,7 +59,7 @@ class App extends React.Component {
   
   fetchBreweries(city, state, zip, callback) {
     var baseUrl = " https://yxnbc1dm5e.execute-api.us-east-1.amazonaws.com/dev/breweries?postalCode=" + zip + "&city=" + city + "&state=" + state;
-    var apiKey = "PI9U8B6hNg3Kb80alaGgx4JqzWpd7Sjn14ObVXzb"; //x-api-key
+    var apiKey = "PI9U8B6hNg3Kb80alaGgx4JqzWpd7Sjn14ObVXzb";
     var breweries;
     this.toggleSearchPanel();
 
