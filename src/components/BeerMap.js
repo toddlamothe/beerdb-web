@@ -50,6 +50,7 @@ class BeerMap extends Component {
         breweryMarker.addListener('click', function() {
           breweryId = brewery.id;
           clickHandler(breweryId);
+          map.panTo(this.getPosition());
         });
         
         map.fitBounds(bounds);
