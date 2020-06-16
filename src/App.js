@@ -9,6 +9,7 @@ import 'react-sliding-pane/dist/react-sliding-pane.css';
 import HamburgerMenu from 'react-hamburger-menu';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import {Switch, Route, Link} from 'react-router-dom';
 
 class App extends React.Component {
   constructor(props) {
