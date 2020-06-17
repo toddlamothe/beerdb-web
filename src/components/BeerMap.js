@@ -9,7 +9,8 @@ class BeerMap extends Component {
       markerClickHandler : props.onBreweryClick,
       center : props.center,
       zoom : 3
-    }    
+    }
+    console.log("Props: ", props);
     
     this.onGoogleApiLoaded = this.onGoogleApiLoaded.bind(this);
     this.renderMarkers = this.renderMarkers.bind(this);

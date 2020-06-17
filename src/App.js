@@ -1,8 +1,8 @@
 import React from 'react';
-import logo from './logo.svg';
 import BeerMap from './components/BeerMap';
 import BeerSearchForm from './components/BeerSearchForm';
 import BreweryInfo from './components/BreweryInfo';
+import Header from './components/Header';
 import Modal from 'react-modal';
 import SlidingPane from 'react-sliding-pane';
 import 'react-sliding-pane/dist/react-sliding-pane.css';
@@ -115,29 +115,17 @@ class App extends React.Component {
   render() {
       return ( 
         <div className="App">
-          <nav className="navbar navbar-light">
-            <div>
-              BeerDb
-            </div>
-
-          <HamburgerMenu
-              isOpen={this.state.isSearchPanelOpen}
-              menuClicked={this.toggleSearchPanel.bind(this)}
-              width={18}
-              height={15}
-              strokeWidth={1}
-              rotate={0}
-              color='black'
-              borderRadius={0}
-              animationDuration={0.5}
-          />
-          </nav>
-          <BeerMap
-            isMarkerShown
-            breweries={this.state.breweries}
-            onBreweryClick={this.breweryMarkerClickHandler}
-            center={this.state.defaultMapCenter}
-          />
+          <Header hamburgerMenuClicked={this.toggleSearchPanel.bind(this)} />
+          
+          <Route children={(props) => ( 
+            <BeerMap
+              isMarkerShown
+              breweries={this.state.breweries}
+              onBreweryClick={this.breweryMarkerClickHandler}
+              center={this.state.defaultMapCenter}
+              {...props}
+            />
+          )} />          
           
           <div ref={ref => this.el = ref}>
             <SlidingPane
