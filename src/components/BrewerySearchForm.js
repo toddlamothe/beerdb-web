@@ -4,10 +4,10 @@ import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import './BeerSearchForm.css';
-import BeerSearchFormInvalidCriteriaError from './BeerSearchFormInvalidCriteriaError';
+import './BrewerySearchForm.css';
+import BrewerySearchFormInvalidCriteriaError from './BrewerySearchFormInvalidCriteriaError';
 
-class BeerSearchForm extends React.Component {
+class BrewerySearchForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -15,7 +15,7 @@ class BeerSearchForm extends React.Component {
       state : "", 
       zip : "",
       lat : "",
-      lon : "" ,
+      lng : "" ,
       showInvalidCriteriaError : false
     }
         
@@ -36,8 +36,8 @@ class BeerSearchForm extends React.Component {
     };
 
     this.setState({
-      lat : null,
-      lon : null,
+      lat : "",
+      lng : "",
       showInvalidCriteriaError : false
     });
     this.props.onSearchSubmitted(this.state)    
@@ -69,7 +69,7 @@ class BeerSearchForm extends React.Component {
     
   renderError() {
     return (
-      <BeerSearchFormInvalidCriteriaError
+      <BrewerySearchFormInvalidCriteriaError
         visible={this.state.showInvalidCriteriaError} 
       />
     )
@@ -125,6 +125,4 @@ class BeerSearchForm extends React.Component {
   } 
 }
 
-export default BeerSearchForm
-
-
+export default BrewerySearchForm
