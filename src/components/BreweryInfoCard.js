@@ -1,7 +1,7 @@
 import React from 'react';
-import './BreweryInfo.css';
+import './BreweryInfoCard.css';
 
-class BreweryInfo extends React.Component {
+class BreweryInfoCard extends React.Component {
   constructor(props) {
     super(props);
     var mapUrlBase = "https://www.google.com/maps/dir/?api=1&origin=&destination=";
@@ -30,4 +30,4 @@ class BreweryInfo extends React.Component {
   }
 }
 
-export default BreweryInfo;
+export default BreweryInfoCard;

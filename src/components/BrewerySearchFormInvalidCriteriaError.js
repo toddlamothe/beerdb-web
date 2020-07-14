@@ -4,7 +4,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Alert from 'react-bootstrap/Alert';
 
-class BeerSearchFormInvalidCriteriaError extends React.Component {
+class BrewerySearchFormInvalidCriteriaError extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -32,7 +32,7 @@ class BeerSearchFormInvalidCriteriaError extends React.Component {
           <Row>
             <Col>
               <Alert key="danger" variant="danger">
-                <small>YOU MUST ENTER A LOCATION</small>
+                <small>Please enter search criteria</small>
               </Alert>
             </Col>
           </Row>
@@ -44,4 +44,4 @@ class BeerSearchFormInvalidCriteriaError extends React.Component {
   }
 };
 
-export default BeerSearchFormInvalidCriteriaError;
+export default BrewerySearchFormInvalidCriteriaError;
