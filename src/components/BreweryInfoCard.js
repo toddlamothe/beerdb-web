@@ -4,11 +4,11 @@ import './BreweryInfoCard.css';
 class BreweryInfoCard extends React.Component {
   constructor(props) {
     super(props);
-    var mapUrlBase = "https://www.google.com/maps/dir/?api=1&origin=&destination=";
-    var mapUrl = mapUrlBase + props.brewery.coords.lat + ", " + props.brewery.coords.lng;
+    var directionsUrlBase = "https://www.google.com/maps/dir/?api=1&origin=&destination=";
+    var directionsUrl = directionsUrlBase + props.brewery.coords.lat + ", " + props.brewery.coords.lng;
     this.state = {
       brewery : props.brewery,
-      breweryDirectionsMapUrl : mapUrl
+      breweryDirectionsUrl : directionsUrl
     }
   }
   
@@ -16,9 +16,12 @@ class BreweryInfoCard extends React.Component {
     return (
       <div>
         <div class="brewery-search-directions">
-            <a target="#" href={this.state.breweryDirectionsMapUrl}>
-              <img width="40" height="40" src={require("../images/e2c92dcca549e10c8ecf8049fddda317.webp")} />
-            </a>
+            <a target="#" href={this.state.breweryDirectionsUrl}>
+              Directions
+            </a> |
+            <a target="#" href={this.state.brewery.url}>
+              Website
+            </a>            
         </div>
         <div>
           <small>
