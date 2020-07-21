@@ -5,10 +5,12 @@ import BreweryInfoCard from './BreweryInfoCard';
 import Header from './Header';
 import BrewerySearchForm from './BrewerySearchForm';
 import BreweryDataService from '../services/BreweryService';
+import BrewerySpinner from './BrewerySpinner';
 import queryString from 'query-string';
 import { useHistory } from 'react-router-dom'
 import SlidingPane from 'react-sliding-pane';
 import "react-sliding-pane/dist/react-sliding-pane.css";
+import './Main.css';
 
 // Main is a container for BeerMap content and components. It also serves
 // as a child of App that will accept location props from the parent router
@@ -30,6 +32,7 @@ class Main extends Component {
     };
 
     this.state = {
+      loading : false,
       isSearchPanelOpen : true,
       mapState : mapState,
       isInfoPanelOpen : false,
@@ -76,17 +79,28 @@ class Main extends Component {
   
   onSearchSubmitted(searchCriteria) {
     var breweryService = new BreweryDataService();
+    this.setSpinnerState(true);
     var breweries = breweryService.getBreweries(searchCriteria, (breweries) => {
-      this.setState( {
-        breweries : breweries,
-        isSearchPanelOpen : false,
-        mapState : {
-          center : this.state.mapState.center,
-          zoom : this.state.mapState.zoom,
-          fitBounds : true
-        }
-      })
+      this.setSpinnerState(false);
+      if (breweries) {
+        this.setState( {
+          breweries : breweries,
+          isSearchPanelOpen : false,
+          mapState : {
+            center : this.state.mapState.center,
+            zoom : this.state.mapState.zoom,
+            fitBounds : true
+          }
+        })        
+      }
+    });
+  }
+  
+  setSpinnerState(spin) {
+    this.setState( {
+      loading : spin
     })
+    
   }
   
   breweryMarkerClickHandler(breweryId) {
@@ -104,10 +118,13 @@ class Main extends Component {
         selectedBrewery : selectedBrewery,
       })
   }
-  
+  // <Spinner
+  //   active={true}
+  // />  
   render() {
     return (
       <div>
+
         <Header hamburgerMenuClicked={this.toggleSearchPanel.bind(this)} />
 
         <BeerMap 
@@ -118,7 +135,7 @@ class Main extends Component {
           breweries={this.state.breweries}
           onBreweryClick={this.breweryMarkerClickHandler}
         />
-        
+  
         <SlidingPane
             className='search-panel'
             overlayClassName='search-panel'
@@ -147,6 +164,10 @@ class Main extends Component {
               brewery = {this.state.selectedBrewery}
             />                
         </SlidingPane>
+
+        <div  className="brewerySpinner">
+          {this.state.loading && <BrewerySpinner/>}
+        </div>
         
       </div>
     )
