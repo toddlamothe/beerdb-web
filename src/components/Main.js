@@ -32,7 +32,7 @@ class Main extends Component {
     };
 
     this.state = {
-      loading : true,
+      loading : false,
       isSearchPanelOpen : true,
       mapState : mapState,
       isInfoPanelOpen : false,
@@ -82,16 +82,18 @@ class Main extends Component {
     this.setSpinnerState(true);
     var breweries = breweryService.getBreweries(searchCriteria, (breweries) => {
       this.setSpinnerState(false);
-      this.setState( {
-        breweries : breweries,
-        isSearchPanelOpen : false,
-        mapState : {
-          center : this.state.mapState.center,
-          zoom : this.state.mapState.zoom,
-          fitBounds : true
-        }
-      })
-    })
+      if (breweries) {
+        this.setState( {
+          breweries : breweries,
+          isSearchPanelOpen : false,
+          mapState : {
+            center : this.state.mapState.center,
+            zoom : this.state.mapState.zoom,
+            fitBounds : true
+          }
+        })        
+      }
+    });
   }
   
   setSpinnerState(spin) {
@@ -164,7 +166,7 @@ class Main extends Component {
         </SlidingPane>
 
         <div  className="brewerySpinner">
-          <BrewerySpinner/>
+          {this.state.loading && <BrewerySpinner/>}
         </div>
         
       </div>

@@ -32,6 +32,7 @@ class BreweryDataService {
         }
         else {
           console.log("search returned no results");
+          callback();
         }
       })
       .catch(console.log)      
