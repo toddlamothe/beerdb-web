@@ -17,6 +17,7 @@ class Header extends React.Component {
         </div>
 
         <HamburgerMenu
+            isOpen={false}
             menuClicked={this.state.hamburgerMenuClicked}
             width={18} height={15} strokeWidth={1} rotate={0} color='black' borderRadius={0} animationDuration={0.5}
         />

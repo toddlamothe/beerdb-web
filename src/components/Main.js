@@ -17,6 +17,7 @@ import './Main.css';
 class Main extends Component {
   constructor(props) {
     super(props);
+    console.log("navigator = ", navigator);
     const defaultMapState = {
       center: { lat: 39.8283,lng: -98.5795 },
       zoom : 7
