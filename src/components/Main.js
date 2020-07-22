@@ -17,7 +17,6 @@ import './Main.css';
 class Main extends Component {
   constructor(props) {
     super(props);
-    console.log("navigator = ", navigator);
     const defaultMapState = {
       center: { lat: 39.8283,lng: -98.5795 },
       zoom : 7
@@ -47,6 +46,13 @@ class Main extends Component {
     this.breweryMarkerClickHandler = this.breweryMarkerClickHandler.bind(this);
     this.showBreweryInfoPanel = this.showBreweryInfoPanel.bind(this);
   };
+  
+  componentDidMount() {
+    navigator.geolocation.getCurrentPosition(function(position) {
+      console.log("Latitude is :", position.coords.latitude);
+      console.log("Longitude is :", position.coords.longitude);
+    });    
+  }
   
   mapStateChangedHandler(mapState, fitBounds = false) {
     const querystringParameters = this.state.mapState.center;
@@ -100,8 +106,7 @@ class Main extends Component {
   setSpinnerState(spin) {
     this.setState( {
       loading : spin
-    })
-    
+    })  
   }
   
   breweryMarkerClickHandler(breweryId) {
@@ -119,9 +124,7 @@ class Main extends Component {
         selectedBrewery : selectedBrewery,
       })
   }
-  // <Spinner
-  //   active={true}
-  // />  
+
   render() {
     return (
       <div>
