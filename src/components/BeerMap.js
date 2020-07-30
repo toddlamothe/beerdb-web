@@ -13,26 +13,26 @@ class BeerMap extends Component {
       breweries : props.breweries,
       markerClickHandler : props.onBreweryClick
     }
-    
+
     this.renderMarkers = this.renderMarkers.bind(this);
   }
-  
+
   onGoogleApiLoaded(map, maps) {
     map.addListener('dragend', () => {
       this.state.mapStateChanged(this.mapState(map), false);
     });
-        
+
     map.addListener('zoom_changed', () => {
       this.state.mapStateChanged(this.mapState(map));
-    }); 
-    
+    });
+
     this.setState( {
       map : map,
       maps : maps
     });
-    
+
   }
-  
+
   mapState(map) {
     return {
       center : {
@@ -49,11 +49,11 @@ class BeerMap extends Component {
       console.log("GoogleApi not loaded, unable to render markers");
       return;
     }
-  
+
     if (this.props.breweries) {
       var breweryMarker;
       var breweryId;
-      
+
       const bounds = new window.google.maps.LatLngBounds();
       this.props.breweries.map( (brewery) => {
         bounds.extend(brewery.coords)
@@ -64,7 +64,7 @@ class BeerMap extends Component {
           snippet: "[BREWERY SNIPPET]",
           icon: require("../images/Icon-Small-40.png"),
         });
-      
+
         breweryMarker.addListener('click', function() {
           breweryId = brewery.id;
           map.panTo(this.getPosition());
@@ -76,12 +76,12 @@ class BeerMap extends Component {
       }
       this.state.mapStateChanged(this.mapState(map));
     };
-  }; 
+  };
 
   componentDidUpdate() {
     this.renderMarkers(this.state.markerClickHandler);
   }
-  
+
   render() {
     return (
       <div style={{ height: '95vh', width: '100%' }}>

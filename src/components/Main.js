@@ -25,7 +25,7 @@ class Main extends Component {
     const mapState = {
       center : {
         lat : querystringParameters.lat ? Number(querystringParameters.lat) : defaultMapState.center.lat,
-        lng : querystringParameters.lng ? Number(querystringParameters.lng) : defaultMapState.center.lng  
+        lng : querystringParameters.lng ? Number(querystringParameters.lng) : defaultMapState.center.lng
       },
       zoom : querystringParameters.zoom ? Number(querystringParameters.zoom) : defaultMapState.zoom,
       fitBounds : true
@@ -40,13 +40,13 @@ class Main extends Component {
         name : ""
       }
     };
-    
+
     this.mapStateChangedHandler = this.mapStateChangedHandler.bind(this);
     this.onSearchSubmitted = this.onSearchSubmitted.bind(this);
     this.breweryMarkerClickHandler = this.breweryMarkerClickHandler.bind(this);
     this.showBreweryInfoPanel = this.showBreweryInfoPanel.bind(this);
   };
-  
+
   mapStateChangedHandler(mapState, fitBounds = false) {
     const querystringParameters = this.state.mapState.center;
     // If new route matches current route, do not push duplicate to history
@@ -55,7 +55,7 @@ class Main extends Component {
       ) {
         return;
     };
-    
+
     // Build new querystring and add it to route history
     var newRoute = "/?lat=" + mapState.center.lat + "&lng=" + mapState.center.lng + "&zoom=" + mapState.zoom;
     this.props.history.push(newRoute);
@@ -76,7 +76,7 @@ class Main extends Component {
         isSearchPanelOpen: !this.state.isSearchPanelOpen
     });
   };
-  
+
   onSearchSubmitted(searchCriteria) {
     var breweryService = new BreweryDataService();
     this.setSpinnerState(true);
@@ -91,22 +91,21 @@ class Main extends Component {
             zoom : this.state.mapState.zoom,
             fitBounds : true
           }
-        })        
+        })
       }
     });
   }
-  
+
   setSpinnerState(spin) {
     this.setState( {
       loading : spin
     })
-    
   }
-  
+
   breweryMarkerClickHandler(breweryId) {
     this.showBreweryInfoPanel(breweryId);
   }
-  
+
   showBreweryInfoPanel(breweryId) {
       var selectedBrewery = this.state.breweries.find( (brewery) => {
         return brewery.id === breweryId;
@@ -118,16 +117,14 @@ class Main extends Component {
         selectedBrewery : selectedBrewery,
       })
   }
-  // <Spinner
-  //   active={true}
-  // />  
+
   render() {
     return (
       <div>
 
         <Header hamburgerMenuClicked={this.toggleSearchPanel.bind(this)} />
 
-        <BeerMap 
+        <BeerMap
           center={this.state.mapState.center}
           zoom={this.state.mapState.zoom}
           fitBounds={this.state.mapState.fitBounds}
@@ -135,7 +132,7 @@ class Main extends Component {
           breweries={this.state.breweries}
           onBreweryClick={this.breweryMarkerClickHandler}
         />
-  
+
         <SlidingPane
             className='search-panel'
             overlayClassName='search-panel'
@@ -158,17 +155,17 @@ class Main extends Component {
             // title='BOTTOM PANE'
             from='bottom'
             width='100%'
-            onRequestClose={ () => this.setState({ isInfoPanelOpen: false }) }                
+            onRequestClose={ () => this.setState({ isInfoPanelOpen: false }) }
             >
-            <BreweryInfoCard 
+            <BreweryInfoCard
               brewery = {this.state.selectedBrewery}
-            />                
+            />
         </SlidingPane>
 
         <div  className="brewerySpinner">
           {this.state.loading && <BrewerySpinner/>}
         </div>
-        
+
       </div>
     )
   };

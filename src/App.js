@@ -10,7 +10,7 @@ function App() {
     <div className="App">
       <Route children={(props) => (
         <Main {...props} />
-        )} 
+        )}
       />
     </div>
   );
