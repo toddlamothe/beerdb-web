@@ -52,7 +52,7 @@ class BrewerySearchForm extends React.Component {
     console.log('[handleNearMeSearch]');
     e.preventDefault();
 
-    navigator.geolocation.getCurrentPosition(function(position) {
+    navigator.geolocation.getCurrentPosition((position) => {
       const geoService = new GeoService();
       geoService.getLocationData(position.coords.latitude, position.coords.longitude, (geoData) => {
         if (geoData && geoData.results) {
