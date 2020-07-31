@@ -162,7 +162,7 @@ class Main extends Component {
             />
         </SlidingPane>
 
-        <div  className="brewerySpinner">
+        <div className="brewerySpinner">
           {this.state.loading && <BrewerySpinner/>}
         </div>
 
