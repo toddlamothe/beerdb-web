@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
-import {Route, Link} from 'react-router-dom';
 import BeerMap from './BeerMap';
 import BreweryInfoCard from './BreweryInfoCard';
 import Header from './Header';
 import BrewerySearchForm from './BrewerySearchForm';
 import BreweryDataService from '../services/BreweryService';
-import BrewerySpinner from './BrewerySpinner';
+import SpinnerComponent from './SpinnerComponent';
+import { spinnerService } from '../services/SpinnerService';
 import queryString from 'query-string';
-import { useHistory } from 'react-router-dom'
 import SlidingPane from 'react-sliding-pane';
 import "react-sliding-pane/dist/react-sliding-pane.css";
 import './Main.css';
@@ -79,9 +78,8 @@ class Main extends Component {
 
   onSearchSubmitted(searchCriteria) {
     var breweryService = new BreweryDataService();
-    this.setSpinnerState(true);
-    var breweries = breweryService.getBreweries(searchCriteria, (breweries) => {
-      this.setSpinnerState(false);
+    spinnerService.show("brewerySearchSpinner");
+    breweryService.getBreweries(searchCriteria, (breweries) => {
       if (breweries) {
         this.setState( {
           breweries : breweries,
@@ -93,13 +91,8 @@ class Main extends Component {
           }
         })
       }
+      spinnerService.hide("brewerySearchSpinner");
     });
-  }
-
-  setSpinnerState(spin) {
-    this.setState( {
-      loading : spin
-    })
   }
 
   breweryMarkerClickHandler(breweryId) {
@@ -150,7 +143,7 @@ class Main extends Component {
         <SlidingPane
             className='brewery-info-panel'
             title={this.state.selectedBrewery.name}
-            closeIcon=<img src={this.state.selectedBrewery.images ? this.state.selectedBrewery.images.icon : ""} />
+            closeIcon=<img alt="" src={this.state.selectedBrewery.images ? this.state.selectedBrewery.images.icon : ""} />
             isOpen={ this.state.isInfoPanelOpen }
             // title='BOTTOM PANE'
             from='bottom'
@@ -162,8 +155,8 @@ class Main extends Component {
             />
         </SlidingPane>
 
-        <div  className="brewerySpinner">
-          {this.state.loading && <BrewerySpinner/>}
+        <div className="brewerySpinner">
+          <SpinnerComponent name="brewerySearchSpinner" show=""/>
         </div>
 
       </div>
