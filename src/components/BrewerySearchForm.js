@@ -7,6 +7,7 @@ import Col from 'react-bootstrap/Col';
 import './BrewerySearchForm.css';
 import BrewerySearchFormInvalidCriteriaError from './BrewerySearchFormInvalidCriteriaError';
 import GeoService from '../services/GeoService';
+import { spinnerService } from '../services/SpinnerService';
 
 class BrewerySearchForm extends React.Component {
   constructor(props) {
@@ -51,14 +52,14 @@ class BrewerySearchForm extends React.Component {
   handleNearMeSearch(e) {
     console.log('[handleNearMeSearch]');
     e.preventDefault();
-
+    spinnerService.show("brewerySearchSpinner");
     navigator.geolocation.getCurrentPosition((position) => {
       const geoService = new GeoService();
       geoService.getLocationData(position.coords.latitude, position.coords.longitude, (geoData) => {
         if (geoData && geoData.results) {
 
           const zipCode = geoData.results[0].address_components.find((element) => {
-            return element.types[0] == "postal_code";
+            return element.types[0] === "postal_code";
           });
 
           console.log("zipCode = ", zipCode.short_name);
@@ -66,6 +67,7 @@ class BrewerySearchForm extends React.Component {
           this.props.onSearchSubmitted(this.state);
         };
       })
+      spinnerService.hide("brewerySearchSpinner");
     });
 
   }
