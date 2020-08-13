@@ -79,7 +79,7 @@ class Main extends Component {
   onSearchSubmitted(searchCriteria) {
     var breweryService = new BreweryDataService();
     spinnerService.show("brewerySearchSpinner");
-    breweryService.getBreweries(searchCriteria, (breweries) => {
+    breweryService.getBreweries(searchCriteria).then((breweries) => {
       if (breweries) {
         this.setState( {
           breweries : breweries,
