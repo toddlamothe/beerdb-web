@@ -30,8 +30,8 @@ class BreweryDataService {
       return breweries;
     }
     else {
-      console.log("search returned no results");
-      return;
+      // console.log("search returned no results");
+      throw new Error('Search returned no results');
     }
   }
 }
