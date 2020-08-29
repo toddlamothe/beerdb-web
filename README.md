@@ -17,6 +17,12 @@ You will also see any lint errors in the console.
 Launches the test runner in the interactive watch mode.<br />
 See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
+### `npm run cypress:open`
+
+Launches Cypress UI test runner in interactive mode<br />
+When Cypress loads, select the UI tests you'd like to run.
+See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+
 ### `npm run build`
 
 Builds the app for production to the `build` folder.<br />
