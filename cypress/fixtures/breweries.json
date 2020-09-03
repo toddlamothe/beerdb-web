@@ -1,0 +1,319 @@
+{
+    "currentPage": 1,
+    "numberOfPages": 1,
+    "totalResults": 4,
+    "data": [
+        {
+            "id": "AXqmST",
+            "name": "Halyard Brewing Co",
+            "streetAddress": "80 Ethan Allen Drive #2",
+            "locality": "South Burlington",
+            "region": "Vermont",
+            "postalCode": "05403",
+            "phone": "(802) 497-1858",
+            "website": "https://halyardbrewing.us/",
+            "latitude": 44.4835035,
+            "longitude": -73.1566258,
+            "isPrimary": "Y",
+            "inPlanning": "N",
+            "isClosed": "N",
+            "openToPublic": "Y",
+            "locationType": "micro",
+            "locationTypeDisplay": "Micro Brewery",
+            "countryIsoCode": "US",
+            "status": "verified",
+            "statusDisplay": "Verified",
+            "createDate": "2018-02-06 13:48:08",
+            "updateDate": "2020-06-16 15:02:55",
+            "hoursOfOperationExplicit": {
+                "thu": [
+                    {
+                        "startTime": "1:00pm",
+                        "endTime": "5:00pm"
+                    }
+                ],
+                "fri": [
+                    {
+                        "startTime": "1:00pm",
+                        "endTime": "5:00pm"
+                    }
+                ],
+                "sat": [
+                    {
+                        "startTime": "1:00pm",
+                        "endTime": "4:00pm"
+                    }
+                ]
+            },
+            "hoursOfOperationExplicitString": "thu-1:00pm-5:00pm,fri-1:00pm-5:00pm,sat-1:00pm-4:00pm",
+            "timezoneId": "America/New_York",
+            "breweryId": "g4X0VL",
+            "brewery": {
+                "id": "g4X0VL",
+                "name": "Halyard Brewing Co",
+                "nameShortDisplay": "Halyard Brewing",
+                "description": "Ginger Beer was first brewed during the colonial spice trade, when ginger from southeast Asia and cane-sugar from the Caribbean were fermented to produce a mildly alcoholic and wildly popular beer. \r\n\r\nGinger Beer was one of America’s favorite beverages until the 1920s when prohibition put a stop to the public production and sale of alcoholic ginger beer, leaving it largely forgotten. \r\n\r\nWe have worked hard to rediscover the lost craft of brewing alcoholic ginger beer, and in doing so, pay homage to the ginger beer of America’s past while innovating with new techniques and flavors. \r\n\r\nAll of our ginger beers are made with organic and fair trade ingredients and are naturally fermented, gluten free alcoholic beverages that can be enjoyed on their own, on ice with a squeeze of lime or in a hand fashioned cocktail.\r\n\r\nAt Halyard Brewing Company, we believe in the gallantry of wanderlust, be it near or far. We are rovers, environmentalists, philosophers, brewers, dancers, poets. We are lovers of difference. Our faith is that of the open sky, our sacrament is the fiery rhizome: ginger.\r\n\r\nWe are proud to be a Vermont company and are inspired by the people and beauty of this great state and the perseverance of those who have made Vermont their home.",
+                "website": "https://halyardbrewing.us/",
+                "established": "2016",
+                "isOrganic": "N",
+                "images": {
+                    "icon": "https://brewerydb-images.s3.amazonaws.com/brewery/g4X0VL/upload_EXVqD4-icon.png",
+                    "medium": "https://brewerydb-images.s3.amazonaws.com/brewery/g4X0VL/upload_EXVqD4-medium.png",
+                    "large": "https://brewerydb-images.s3.amazonaws.com/brewery/g4X0VL/upload_EXVqD4-large.png",
+                    "squareMedium": "https://brewerydb-images.s3.amazonaws.com/brewery/g4X0VL/upload_EXVqD4-squareMedium.png",
+                    "squareLarge": "https://brewerydb-images.s3.amazonaws.com/brewery/g4X0VL/upload_EXVqD4-squareLarge.png"
+                },
+                "status": "verified",
+                "statusDisplay": "Verified",
+                "createDate": "2018-02-06 13:45:53",
+                "updateDate": "2020-06-16 15:02:25",
+                "isMassOwned": "N",
+                "isInBusiness": "Y",
+                "brewersAssociation": {
+                    "brewersAssocationId": "XG5UCA8STM",
+                    "isCertifiedCraftBrewer": "Y"
+                },
+                "isVerified": "N"
+            },
+            "country": {
+                "isoCode": "US",
+                "name": "UNITED STATES",
+                "displayName": "United States",
+                "isoThree": "USA",
+                "numberCode": 840,
+                "createDate": "2012-01-03 02:41:33"
+            }
+        },
+        {
+            "id": "7Tjp4C",
+            "name": "Main Brewery",
+            "streetAddress": "5 Bartlett Bay Road",
+            "locality": "South Burlington",
+            "region": "Vermont",
+            "postalCode": "05403",
+            "phone": "(802) 864-9820",
+            "website": "http://www.orlio.net/",
+            "latitude": 44.4284066,
+            "longitude": -73.2131557,
+            "isPrimary": "Y",
+            "inPlanning": "N",
+            "isClosed": "Y",
+            "openToPublic": "N",
+            "locationType": "micro",
+            "locationTypeDisplay": "Micro Brewery",
+            "countryIsoCode": "US",
+            "status": "verified",
+            "statusDisplay": "Verified",
+            "createDate": "2012-01-03 02:42:04",
+            "updateDate": "2015-11-11 18:18:14",
+            "breweryId": "DnCVKt",
+            "brewery": {
+                "id": "DnCVKt",
+                "name": "Orlio Organic",
+                "nameShortDisplay": "Orlio Organic",
+                "website": "http://www.orlio.net/",
+                "isOrganic": "N",
+                "status": "verified",
+                "statusDisplay": "Verified",
+                "createDate": "2012-01-03 02:42:04",
+                "updateDate": "2018-11-08 18:59:55",
+                "isMassOwned": "N",
+                "isInBusiness": "N",
+                "isVerified": "N"
+            },
+            "country": {
+                "isoCode": "US",
+                "name": "UNITED STATES",
+                "displayName": "United States",
+                "isoThree": "USA",
+                "numberCode": 840,
+                "createDate": "2012-01-03 02:41:33"
+            }
+        },
+        {
+            "id": "Qtw1FC",
+            "name": "Main Brewery",
+            "streetAddress": "80 Ethan Allen Dr",
+            "locality": "South Burlington",
+            "region": "Vermont",
+            "postalCode": "05403",
+            "phone": "(802) 735-1288",
+            "website": "http://infinitybrewing.com/",
+            "latitude": 44.48354,
+            "longitude": -73.156578,
+            "isPrimary": "Y",
+            "inPlanning": "N",
+            "isClosed": "N",
+            "openToPublic": "Y",
+            "locationType": "micro",
+            "locationTypeDisplay": "Micro Brewery",
+            "countryIsoCode": "US",
+            "status": "verified",
+            "statusDisplay": "Verified",
+            "createDate": "2014-09-07 17:48:04",
+            "updateDate": "2014-09-07 17:48:04",
+            "hoursOfOperationExplicit": {
+                "thu": [
+                    {
+                        "startTime": "4:00pm",
+                        "endTime": "8:00pm"
+                    }
+                ],
+                "fri": [
+                    {
+                        "startTime": "4:00pm",
+                        "endTime": "8:00pm"
+                    }
+                ],
+                "sat": [
+                    {
+                        "startTime": "12:00pm",
+                        "endTime": "6:00pm"
+                    }
+                ],
+                "sun": [
+                    {
+                        "startTime": "12:00pm",
+                        "endTime": "4:00pm"
+                    }
+                ]
+            },
+            "hoursOfOperationExplicitString": "thu-4:00pm-8:00pm,fri-4:00pm-8:00pm,sat-12:00pm-6:00pm,sun-12:00pm-4:00pm",
+            "timezoneId": "America/New_York",
+            "breweryId": "WBE4Sc",
+            "brewery": {
+                "id": "WBE4Sc",
+                "name": "Infinity Brewing",
+                "nameShortDisplay": "Infinity",
+                "description": "7 barrel brew operation.  Hours of operation for tasting room and retail outlet are currently Thursdays and Fridays from 4pm until 8pm and Saturdays from noon until 6pm.  Summer Sunday hours are noon until 4pm for tastings.",
+                "website": "http://www.infinitybrewing.com/",
+                "established": "2014",
+                "isOrganic": "N",
+                "images": {
+                    "icon": "https://brewerydb-images.s3.amazonaws.com/brewery/WBE4Sc/upload_kmMkXu-icon.png",
+                    "medium": "https://brewerydb-images.s3.amazonaws.com/brewery/WBE4Sc/upload_kmMkXu-medium.png",
+                    "large": "https://brewerydb-images.s3.amazonaws.com/brewery/WBE4Sc/upload_kmMkXu-large.png",
+                    "squareMedium": "https://brewerydb-images.s3.amazonaws.com/brewery/WBE4Sc/upload_kmMkXu-squareMedium.png",
+                    "squareLarge": "https://brewerydb-images.s3.amazonaws.com/brewery/WBE4Sc/upload_kmMkXu-squareLarge.png"
+                },
+                "status": "verified",
+                "statusDisplay": "Verified",
+                "createDate": "2014-09-06 01:03:02",
+                "updateDate": "2018-11-08 18:59:55",
+                "isMassOwned": "N",
+                "isInBusiness": "Y",
+                "isVerified": "N"
+            },
+            "country": {
+                "isoCode": "US",
+                "name": "UNITED STATES",
+                "displayName": "United States",
+                "isoThree": "USA",
+                "numberCode": 840,
+                "createDate": "2012-01-03 02:41:33"
+            }
+        },
+        {
+            "id": "Bp3teL",
+            "name": "Main Brewery",
+            "streetAddress": "5 Bartlett Bay Road",
+            "locality": "South Burlington",
+            "region": "Vermont",
+            "postalCode": "05403",
+            "phone": "(802) 923-1421",
+            "website": "https://www.magichat.net/",
+            "latitude": 44.428405,
+            "longitude": -73.213148,
+            "isPrimary": "Y",
+            "inPlanning": "N",
+            "isClosed": "N",
+            "openToPublic": "Y",
+            "locationType": "micro",
+            "locationTypeDisplay": "Micro Brewery",
+            "countryIsoCode": "US",
+            "yearOpened": "1994",
+            "status": "verified",
+            "statusDisplay": "Verified",
+            "createDate": "2012-01-03 02:42:01",
+            "updateDate": "2020-04-10 12:43:04",
+            "hoursOfOperationExplicit": {
+                "fri": [
+                    {
+                        "startTime": "11:00am",
+                        "endTime": "9:00pm"
+                    }
+                ],
+                "sat": [
+                    {
+                        "startTime": "11:00am",
+                        "endTime": "9:00pm"
+                    }
+                ],
+                "sun": [
+                    {
+                        "startTime": "12:00pm",
+                        "endTime": "5:00pm"
+                    }
+                ],
+                "mon": [
+                    {
+                        "startTime": "11:00am",
+                        "endTime": "7:00pm"
+                    }
+                ],
+                "tue": [
+                    {
+                        "startTime": "11:00am",
+                        "endTime": "7:00pm"
+                    }
+                ],
+                "wed": [
+                    {
+                        "startTime": "11:00am",
+                        "endTime": "7:00pm"
+                    }
+                ],
+                "thu": [
+                    {
+                        "startTime": "11:00am",
+                        "endTime": "7:00pm"
+                    }
+                ]
+            },
+            "hoursOfOperationExplicitString": "fri-11:00am-9:00pm,sat-11:00am-9:00pm,sun-12:00pm-5:00pm,mon-11:00am-7:00pm,tue-11:00am-7:00pm,wed-11:00am-7:00pm,thu-11:00am-7:00pm",
+            "breweryId": "qIqpZc",
+            "brewery": {
+                "id": "qIqpZc",
+                "name": "Magic Hat Brewing Company",
+                "nameShortDisplay": "Magic Hat Brewing",
+                "description": "The Saturnalian Saga of Magic Hat began in 1994 when our first batch of beer was brewed in a funky little space on Flynn Avenue, in Burlington, Vermont.  Dozens of beers and a brewery later, the Vermont brewery finds itself reaching more than 30 states with its unique take on classic styles.  Magic Hat continues to be a leader in craft beer and is currently the only craft brewer putting a performance in every bottle.",
+                "website": "http://www.magichat.net/",
+                "established": "1994",
+                "isOrganic": "N",
+                "images": {
+                    "icon": "https://brewerydb-images.s3.amazonaws.com/brewery/qIqpZc/upload_iBHRP1-icon.png",
+                    "medium": "https://brewerydb-images.s3.amazonaws.com/brewery/qIqpZc/upload_iBHRP1-medium.png",
+                    "large": "https://brewerydb-images.s3.amazonaws.com/brewery/qIqpZc/upload_iBHRP1-large.png",
+                    "squareMedium": "https://brewerydb-images.s3.amazonaws.com/brewery/qIqpZc/upload_iBHRP1-squareMedium.png",
+                    "squareLarge": "https://brewerydb-images.s3.amazonaws.com/brewery/qIqpZc/upload_iBHRP1-squareLarge.png"
+                },
+                "status": "verified",
+                "statusDisplay": "Verified",
+                "createDate": "2012-01-03 02:42:01",
+                "updateDate": "2020-04-10 12:43:40",
+                "isMassOwned": "Y",
+                "isInBusiness": "Y",
+                "isVerified": "N"
+            },
+            "country": {
+                "isoCode": "US",
+                "name": "UNITED STATES",
+                "displayName": "United States",
+                "isoThree": "USA",
+                "numberCode": 840,
+                "createDate": "2012-01-03 02:41:33"
+            }
+        }
+    ],
+    "status": "success"
+}

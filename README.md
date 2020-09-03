@@ -21,6 +21,11 @@ See the section about [running tests](https://facebook.github.io/create-react-ap
 
 Launches Cypress UI test runner in interactive mode<br />
 When Cypress loads, select the UI tests you'd like to run.
+
+A few notes about Cypress configuration:
+* To mock window.fetch calls, the experimental option `experimentalFetchPolyfill` is set to true in cypress.json
+* Custom command `mockGeolocation` was added to support/commands.js to prevent the browser from prompting the user to enable location services
+
 See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
 ### `npm run build`

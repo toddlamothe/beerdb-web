@@ -21,8 +21,8 @@ class BreweryDataService {
               "description" : brewery.brewery.description,
               "url" : brewery.brewery.website,
               "coords" : {
-                  "lat" : brewery.latitude,
-                  "lng" : brewery.longitude
+                "lat" : brewery.latitude,
+                "lng" : brewery.longitude
               },
               "images" : brewery.brewery.images
           }
@@ -30,8 +30,7 @@ class BreweryDataService {
       return breweries;
     }
     else {
-      // console.log("search returned no results");
-      throw new Error('Search returned no results');
+      return;
     }
   }
 }
