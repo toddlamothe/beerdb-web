@@ -50,7 +50,6 @@ class BrewerySearchForm extends React.Component {
   }
 
   handleNearMeSearch(e) {
-    console.log('[handleNearMeSearch]');
     e.preventDefault();
     spinnerService.show("brewerySearchSpinner");
     navigator.geolocation.getCurrentPosition((position) => {
@@ -62,7 +61,6 @@ class BrewerySearchForm extends React.Component {
             return element.types[0] === "postal_code";
           });
 
-          console.log("zipCode = ", zipCode.short_name);
           this.setState({zip: zipCode.short_name});
           this.props.onSearchSubmitted(this.state);
         };

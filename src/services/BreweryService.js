@@ -21,8 +21,8 @@ class BreweryDataService {
               "description" : brewery.brewery.description,
               "url" : brewery.brewery.website,
               "coords" : {
-                  "lat" : brewery.latitude,
-                  "lng" : brewery.longitude
+                "lat" : brewery.latitude,
+                "lng" : brewery.longitude
               },
               "images" : brewery.brewery.images
           }
