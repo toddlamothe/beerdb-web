@@ -8,6 +8,7 @@ import './BrewerySearchForm.css';
 import BrewerySearchFormInvalidCriteriaError from './BrewerySearchFormInvalidCriteriaError';
 import GeoService from '../services/GeoService';
 import { spinnerService } from '../services/SpinnerService';
+import ReactGA from 'react-ga';
 
 class BrewerySearchForm extends React.Component {
   constructor(props) {
@@ -33,6 +34,7 @@ class BrewerySearchForm extends React.Component {
 
   handleBrewerySearch(e) {
     e.preventDefault();
+    ReactGA.event({category: 'Search',action: 'Standard Search'});
     if(!this.searchCriteriaIsValid(this.state)) {
         console.error("Invalid search criteria")
         this.setState({
@@ -52,6 +54,8 @@ class BrewerySearchForm extends React.Component {
   handleNearMeSearch(e) {
     e.preventDefault();
     spinnerService.show("brewerySearchSpinner");
+    ReactGA.event({category: 'Search',action: 'Search Near Me'});
+
     navigator.geolocation.getCurrentPosition((position) => {
       const geoService = new GeoService();
       geoService.getLocationData(position.coords.latitude, position.coords.longitude, (geoData) => {
