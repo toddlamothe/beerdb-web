@@ -10,6 +10,7 @@ import queryString from 'query-string';
 import SlidingPane from 'react-sliding-pane';
 import "react-sliding-pane/dist/react-sliding-pane.css";
 import './Main.css';
+import ReactGA from 'react-ga';
 
 // Main is a container for BeerMap content and components. It also serves
 // as a child of App that will accept location props from the parent router
@@ -96,6 +97,7 @@ class Main extends Component {
   }
 
   breweryMarkerClickHandler(breweryId) {
+    ReactGA.event({category: 'View',action: 'View Brewery Details'});
     this.showBreweryInfoPanel(breweryId);
   }
 
