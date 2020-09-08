@@ -9,7 +9,6 @@ describe('BeerDb Web App', () => {
 
   it('Searches near me', () => {
     cy.fixture('breweries.json').as('breweriesJSON');
-    cy.fixture('browserCoords.json').as('browserCoordsJSON');
     cy.visit("http://localhost:3000/")
 
     cy.contains("Near Me").click();
