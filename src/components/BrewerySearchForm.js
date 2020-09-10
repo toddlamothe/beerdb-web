@@ -5,7 +5,7 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import './BrewerySearchForm.css';
-import BrewerySearchFormInvalidCriteriaError from './BrewerySearchFormInvalidCriteriaError';
+import BrewerySearchFormError from './BrewerySearchFormError';
 import GeoService from '../services/GeoService';
 import { spinnerService } from '../services/SpinnerService';
 import ReactGA from 'react-ga';
@@ -28,9 +28,6 @@ class BrewerySearchForm extends React.Component {
     this.handleChangeZip = this.handleChangeZip.bind(this);
     this.handleBrewerySearch = this.handleBrewerySearch.bind(this);
     this.handleNearMeSearch = this.handleNearMeSearch.bind(this);
-  }
-
-  componentDidMount() {
   }
 
   handleBrewerySearch(e) {
@@ -108,11 +105,11 @@ class BrewerySearchForm extends React.Component {
   renderError() {
     return (
       <div>
-      <BrewerySearchFormInvalidCriteriaError
+      <BrewerySearchFormError
         visible={this.state.showError}
         message={this.state.errorMessage}
       />
-      <BrewerySearchFormInvalidCriteriaError
+      <BrewerySearchFormError
         visible={this.props.showError}
         message={this.props.errorMessage}
       />

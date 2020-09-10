@@ -4,7 +4,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Alert from 'react-bootstrap/Alert';
 
-class BrewerySearchFormInvalidCriteriaError extends React.Component {
+class BrewerySearchFormError extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -45,4 +45,4 @@ class BrewerySearchFormInvalidCriteriaError extends React.Component {
   }
 };
 
-export default BrewerySearchFormInvalidCriteriaError;
+export default BrewerySearchFormError;
