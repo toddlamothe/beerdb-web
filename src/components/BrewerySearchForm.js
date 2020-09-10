@@ -20,7 +20,7 @@ class BrewerySearchForm extends React.Component {
       zip : "",
       lat : "",
       lng : "" ,
-      showInvalidCriteriaError : false
+      showError : false
     }
 
     this.handleChangeCity = this.handleChangeCity.bind(this);
@@ -39,15 +39,21 @@ class BrewerySearchForm extends React.Component {
     if(!this.searchCriteriaIsValid(this.state)) {
         console.error("Invalid search criteria")
         this.setState({
-          showInvalidCriteriaError : true
+          showError : true,
+          errorMessage : "Invalid search criteria"
         });
         return false;
+    } else {
+      this.setState({
+        showError : false,
+        errorMessage : ""
+      });
     };
 
     this.setState({
       lat : "",
       lng : "",
-      showInvalidCriteriaError : false
+      showError : false
     });
     this.props.onSearchSubmitted(this.state)
   }
@@ -102,14 +108,14 @@ class BrewerySearchForm extends React.Component {
   renderError() {
     return (
       <div>
-        <BrewerySearchFormInvalidCriteriaError
-          visible={this.state.showInvalidCriteriaError}
-          message="Please enter valid search criteria"
-        />
-        <BrewerySearchFormInvalidCriteriaError
-          visible={this.props.showError}
-          message={this.props.errorMessage}
-        />
+      <BrewerySearchFormInvalidCriteriaError
+        visible={this.state.showError}
+        message={this.state.errorMessage}
+      />
+      <BrewerySearchFormInvalidCriteriaError
+        visible={this.props.showError}
+        message={this.props.errorMessage}
+      />
       </div>
     )
   }
