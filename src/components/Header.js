@@ -1,27 +1,31 @@
 import React from 'react';
 import HamburgerMenu from 'react-hamburger-menu';
+import Navbar from 'react-bootstrap/Navbar';
+import Nav from 'react-bootstrap/Nav';
 
 class Header extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       hamburgerMenuClicked : props.hamburgerMenuClicked
-    }  
+    }
   }
-  
+
   render() {
     return (
-      <nav className="navbar navbar-light">
-        <div>
-          BeerDb
-        </div>
-
-        <HamburgerMenu
-            isOpen={false}
-            menuClicked={this.state.hamburgerMenuClicked}
-            width={18} height={15} strokeWidth={1} rotate={0} color='black' borderRadius={0} animationDuration={0.5}
-        />
-      </nav>
+        <Navbar bg="light" expand="lg">
+          <Navbar.Brand href="#home">
+            <img src={ require('../images/beerlvr-logo-sm.png') } />&nbsp;
+            Beerlvr
+          </Navbar.Brand>
+          <Nav className="justify-content-end">
+            <HamburgerMenu
+                isOpen={false}
+                menuClicked={this.state.hamburgerMenuClicked}
+                width={18} height={15} strokeWidth={1} rotate={0} color='black' borderRadius={0} animationDuration={0.5}
+            />
+          </Nav>
+        </Navbar>
     )
   }
 }

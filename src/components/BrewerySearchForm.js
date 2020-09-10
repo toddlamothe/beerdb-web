@@ -13,6 +13,7 @@ import ReactGA from 'react-ga';
 class BrewerySearchForm extends React.Component {
   constructor(props) {
     super(props);
+    console.log("[BrewerySearchForm]: props = ", props);
     this.state = {
       city : "",
       state : "",
@@ -100,9 +101,16 @@ class BrewerySearchForm extends React.Component {
 
   renderError() {
     return (
-      <BrewerySearchFormInvalidCriteriaError
-        visible={this.state.showInvalidCriteriaError}
-      />
+      <div>
+        <BrewerySearchFormInvalidCriteriaError
+          visible={this.state.showInvalidCriteriaError}
+          message="Please enter valid search criteria"
+        />
+        <BrewerySearchFormInvalidCriteriaError
+          visible={this.props.showError}
+          message={this.props.errorMessage}
+        />
+      </div>
     )
   }
 
