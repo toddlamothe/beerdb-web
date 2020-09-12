@@ -10,22 +10,27 @@ class About extends Component {
   render() {
     return (
       <div>
-        <div>
+        <div class="about-text">
           <Link to="/">
             Back to beerlvr
           </Link>
         </div>
         <div class="about-header">
-          <h1 class="underline">
-            <span>welcome!</span>
+          <h1>
+            <span>WELCOME!</span>
           </h1>
         </div>
-        <div>
+        <div class="about-text">
           <span>Use Beerlvr to search for breweries anywhere in the Unites States. Search by location or simply click Near Me to find breweries close by.<br/>Beerlvr is available free of charge and contains no ads.</span>
         </div>
-        <Link to="/">
-          Back to beerlvr
-        </Link>
+        <div>
+          <img class="about-image" src={ require('../images/brewery.jpg') } />&nbsp;
+        </div>
+        <div class="about-text">
+          <Link to="/">
+            Back to beerlvr
+          </Link>
+        </div>
       </div>
     );
   }

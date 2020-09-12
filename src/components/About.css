@@ -1,31 +1,32 @@
-.underline {
-  display: inline-block;
-  border-bottom: 3px solid #231f20;
-  font-weight: 700;
-  line-height: 1em;
-  letter-spacing: .135em;
-  padding-bottom: .125em;
-  text-transform: uppercase;
-}
 
 .about-header {
-  padding: 50px 20px;
+  padding: 10px 10px;
   text-align: center;
-  font-family: "proxima-nova","helvetica","arial","sans";
-}
-
-.about {
-  background-color: #e3dfdb;
   color: #393234;
   font-family: "proxima-nova","helvetica","arial","sans";
   font-size: 15px;
   font-weight: 300;
-  background-color: #e3dfdb;
+  color: #393234;
+  font-family: "proxima-nova","helvetica","arial","sans";
+  font-size: 15px;
+  font-weight: 300;
+  height: 100%;
+}
+
+.about-text {
+  color: #393234;
+  font-family: "proxima-nova","helvetica","arial","sans";
+  font-size: 15px;
+  font-weight: 300;
   color: #393234;
   font-family: "proxima-nova","helvetica","arial","sans";
   font-size: 15px;
   font-weight: 300;
   height: 100%;
   margin: 0;
-  padding: 0;
+  padding: 25px;
+}
+
+.about-image {
+  width: 100%;
 }
