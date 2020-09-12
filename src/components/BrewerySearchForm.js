@@ -118,11 +118,21 @@ class BrewerySearchForm extends React.Component {
   }
 
   render() {
+    const styles = {
+        grid: {
+            paddingLeft: 0,
+            paddingRight: 0
+        },
+        col: {
+            paddingLeft: 0,
+            paddingRight: 0
+        }
+    };
     return (
       <React.Fragment>
-        <Container>
+        <Container fluid style={styles.grid}>
         <Row>
-          <Col>
+          <Col style={styles.col}>
             {this.renderError()}
           </Col>
         </Row>
