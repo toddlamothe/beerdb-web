@@ -1,5 +1,6 @@
 import React from 'react';
 import Main from './components/Main';
+import About from './components/About.js'
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {Route, Switch} from 'react-router-dom';
@@ -11,12 +12,13 @@ function App() {
   return (
     <div className="App">
       <Switch>
-        <Route path="/" children={(props) => (
+        <Route exact path="/" children={(props) => (
           <Main {...props} />
           )}
         />
-        <Route path="/about"
-          
+        <Route path="/about" children={(props) => (
+          <About {...props} />
+          )}
         />
 
 

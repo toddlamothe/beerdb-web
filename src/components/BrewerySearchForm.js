@@ -9,6 +9,8 @@ import BrewerySearchFormError from './BrewerySearchFormError';
 import GeoService from '../services/GeoService';
 import { spinnerService } from '../services/SpinnerService';
 import ReactGA from 'react-ga';
+import {Link} from 'react-router-dom';
+
 
 class BrewerySearchForm extends React.Component {
   constructor(props) {
@@ -170,6 +172,13 @@ class BrewerySearchForm extends React.Component {
               <Button variant="primary" type="submit" onClick={(e) => this.handleNearMeSearch(e)}>Near Me</Button>
             </Form>
           </Col>
+        </Row>
+        <Row>
+          <div class="centered">
+          <small>
+            <Link to="/about">About Beerlvr</Link>
+          </small>
+          </div>
         </Row>
         </Container>
       </React.Fragment>
