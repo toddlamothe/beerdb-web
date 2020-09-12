@@ -89,7 +89,17 @@ class Main extends Component {
             center : this.state.mapState.center,
             zoom : this.state.mapState.zoom,
             fitBounds : true
-          }
+          },
+          showNoResultsError : false,
+          noResultsErrorMessage : ""
+        })
+      } else {
+        // Search returned no results
+        console.log("Search returned no results");
+        console.log("setting state to 'Search returned no results please try harder'");
+        this.setState( {
+          showNoResultsError : true,
+          noResultsErrorMessage : "Search returned no results please try harder"
         })
       }
       spinnerService.hide("brewerySearchSpinner");
@@ -139,7 +149,9 @@ class Main extends Component {
                 this.setState({ isSearchPanelOpen: false });
             } }>
             <BrewerySearchForm
-              onSearchSubmitted={this.onSearchSubmitted} />
+              onSearchSubmitted={this.onSearchSubmitted}
+              showError={this.state.showNoResultsError}
+              errorMessage={this.state.noResultsErrorMessage} />
         </SlidingPane>
 
         <SlidingPane

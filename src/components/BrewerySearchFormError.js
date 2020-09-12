@@ -4,35 +4,36 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Alert from 'react-bootstrap/Alert';
 
-class BrewerySearchFormInvalidCriteriaError extends React.Component {
+class BrewerySearchFormError extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      showError : this.props.visible
+      showError : this.props.visible,
+      errorMessage : this.props.message
     }
     this.onShowError = this.onShowError.bind(this);
     this.onHideError = this.onHideError.bind(this);
   };
-  
+
   onShowError() {
     this.setState({hideError : false});
   }
-  
+
   onHideError() {
     this.setState({hideError : true});
   }
-  
+
   render() {
     const style = this.props.visible ? {} : {display : 'none'};
-    
+
     return (
-      <div style={style}> 
+      <div style={style}>
         <React.Fragment>
           <Container>
           <Row>
             <Col>
               <Alert key="danger" variant="danger">
-                <small>Please enter search criteria</small>
+                <small>{this.props.message}</small>
               </Alert>
             </Col>
           </Row>
@@ -44,4 +45,4 @@ class BrewerySearchFormInvalidCriteriaError extends React.Component {
   }
 };
 
-export default BrewerySearchFormInvalidCriteriaError;
+export default BrewerySearchFormError;

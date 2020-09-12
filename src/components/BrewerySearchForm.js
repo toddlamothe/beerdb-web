@@ -5,7 +5,7 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import './BrewerySearchForm.css';
-import BrewerySearchFormInvalidCriteriaError from './BrewerySearchFormInvalidCriteriaError';
+import BrewerySearchFormError from './BrewerySearchFormError';
 import GeoService from '../services/GeoService';
 import { spinnerService } from '../services/SpinnerService';
 import ReactGA from 'react-ga';
@@ -13,13 +13,14 @@ import ReactGA from 'react-ga';
 class BrewerySearchForm extends React.Component {
   constructor(props) {
     super(props);
+    console.log("[BrewerySearchForm]: props = ", props);
     this.state = {
       city : "",
       state : "",
       zip : "",
       lat : "",
       lng : "" ,
-      showInvalidCriteriaError : false
+      showError : false
     }
 
     this.handleChangeCity = this.handleChangeCity.bind(this);
@@ -29,24 +30,27 @@ class BrewerySearchForm extends React.Component {
     this.handleNearMeSearch = this.handleNearMeSearch.bind(this);
   }
 
-  componentDidMount() {
-  }
-
   handleBrewerySearch(e) {
     e.preventDefault();
     ReactGA.event({category: 'Search',action: 'Standard Search'});
     if(!this.searchCriteriaIsValid(this.state)) {
         console.error("Invalid search criteria")
         this.setState({
-          showInvalidCriteriaError : true
+          showError : true,
+          errorMessage : "Invalid search criteria"
         });
         return false;
+    } else {
+      this.setState({
+        showError : false,
+        errorMessage : ""
+      });
     };
 
     this.setState({
       lat : "",
       lng : "",
-      showInvalidCriteriaError : false
+      showError : false
     });
     this.props.onSearchSubmitted(this.state)
   }
@@ -100,18 +104,35 @@ class BrewerySearchForm extends React.Component {
 
   renderError() {
     return (
-      <BrewerySearchFormInvalidCriteriaError
-        visible={this.state.showInvalidCriteriaError}
+      <div>
+      <BrewerySearchFormError
+        visible={this.state.showError}
+        message={this.state.errorMessage}
       />
+      <BrewerySearchFormError
+        visible={this.props.showError}
+        message={this.props.errorMessage}
+      />
+      </div>
     )
   }
 
   render() {
+    const styles = {
+        grid: {
+            paddingLeft: 0,
+            paddingRight: 0
+        },
+        col: {
+            paddingLeft: 0,
+            paddingRight: 0
+        }
+    };
     return (
       <React.Fragment>
-        <Container>
+        <Container fluid style={styles.grid}>
         <Row>
-          <Col>
+          <Col style={styles.col}>
             {this.renderError()}
           </Col>
         </Row>

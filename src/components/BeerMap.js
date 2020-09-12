@@ -84,7 +84,7 @@ class BeerMap extends Component {
 
   render() {
     return (
-      <div style={{ height: '95vh', width: '100%' }}>
+      <div style={{ height: '89vh', width: '100%' }}>
         <GoogleMapReact
           bootstrapURLKeys={{ key: "AIzaSyB8XchO4u2Ig273475Zl1RImvskWNZDEOw" }}
           center={this.state.mapCenter}
