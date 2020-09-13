@@ -11,5 +11,11 @@
 	<changefreq>daily</changefreq>
 	<priority>1.0</priority>
 </url>
+<url>
+	<loc>https://beerlvr.com/about</loc>
+	<lastmod>2020-09-13T18:48:12-04:00</lastmod>
+	<changefreq>daily</changefreq>
+	<priority>1.0</priority>
+</url>
 </urlset>
 <!-- Generated 2020-09-04T15:53:41-04:00 -->
