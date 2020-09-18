@@ -18,7 +18,7 @@ class Header extends React.Component {
             <img src={ require('../images/beerlvr-logo-sm.png') } />&nbsp;
             Beerlvr
           </Navbar.Brand>
-          <Nav className="justify-content-end">
+          <Nav className="ml-auto">
             <HamburgerMenu
                 isOpen={false}
                 menuClicked={this.state.hamburgerMenuClicked}
