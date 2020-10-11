@@ -4,7 +4,7 @@ beforeEach( () => {
   fetch.mockClear();
 })
 
-test('it should do something???', async () => {
+test('it should return breweries', async () => {
   var breweryService = new BreweryDataService();
   var searchCriteria = {
     city: "",

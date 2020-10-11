@@ -33,6 +33,38 @@ class BreweryDataService {
       return;
     }
   }
+
+  async getBreweryBeers(breweryId) {
+    var baseUrl = "https://yxnbc1dm5e.execute-api.us-east-1.amazonaws.com/dev/breweries/" + breweryId + "/beers";
+    var apiKey = "PI9U8B6hNg3Kb80alaGgx4JqzWpd7Sjn14ObVXzb";
+    var breweryBeers;
+
+    let response = await fetch(baseUrl, {
+      method: 'GET',
+      headers: {
+        "Content-Type": "application/json",
+        "x-api-key" : apiKey
+      },
+    });
+    let data = await response.json();
+    if (data.data && data.data.length > 0) {
+      breweryBeers = data.data.map((beer) => {
+          return {
+              "name" : beer.name,
+              "id" : beer.id,
+              "abv" : beer.abv,
+              "ibu" : beer.ibu,
+              "labels" : beer.labels
+          }
+      });
+      return breweryBeers;
+    }
+    else {
+      return;
+    }
+
+
+  }
 }
 
 export default BreweryDataService;

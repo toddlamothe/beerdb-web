@@ -12,6 +12,9 @@ import ReactGA from 'react-ga';
 import {Link} from 'react-router-dom';
 
 
+import Carousel from 'react-bootstrap/Carousel';
+
+
 class BrewerySearchForm extends React.Component {
   constructor(props) {
     super(props);
@@ -173,6 +176,14 @@ class BrewerySearchForm extends React.Component {
             </Form>
           </Col>
         </Row>
+
+
+        <Row>
+
+        </Row>
+
+
+
         <Row>
           <div class="centered">
           <small>

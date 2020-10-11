@@ -1,18 +1,43 @@
 import React from 'react';
 import './BreweryInfoCard.css';
+import ListGroup from 'react-bootstrap/ListGroup';
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import BreweryDataService from '../services/BreweryService';
+import { spinnerService } from '../services/SpinnerService';
 
 class BreweryInfoCard extends React.Component {
   constructor(props) {
     super(props);
+    // var beersJson = require('./beers.json');
+    // console.log("beersJson.data = ", beersJson.data);
     var directionsUrlBase = "https://www.google.com/maps/dir/?api=1&origin=&destination=";
     var directionsUrl = directionsUrlBase + props.brewery.coords.lat + ", " + props.brewery.coords.lng;
     this.state = {
       brewery : props.brewery,
-      breweryDirectionsUrl : directionsUrl
+      breweryDirectionsUrl : this.directionsUrl,
+      beers : []
     }
   }
-  
+
+  componentDidMount() {
+    var breweryService = new BreweryDataService();
+    breweryService.getBreweryBeers(this.state.brewery.id).then((beers) => {
+      if (beers) {
+        this.setState( {
+          beers : beers
+        })
+      } else {
+        // Search returned no results
+        console.log("brewery has no beers");
+      }
+      spinnerService.hide("brewerySearchSpinner");
+    });
+  }
+
   render() {
+    console.log("this.state.beers = ", this.state.beers);
     return (
       <div>
         <div class="brewery-search-directions">
@@ -21,14 +46,40 @@ class BreweryInfoCard extends React.Component {
             </a> |
             <a target="#" href={this.state.brewery.url}>
               Website
-            </a>            
+            </a>
         </div>
         <div>
           <small>
             {this.state.brewery.description} <br/>
           </small>
         </div>
+          <div>
+          {
+            this.state.beers.map( (beer) => (
+                  <Container>
+                    <Row className="show-grid" float="center">
+                      <Col xs={3} md={1}>
+                        {
+                          beer.labels && beer.labels.icon &&
+                          <img
+                            src={beer.labels.icon}
+                            alt={beer.name}
+                          />
+                        }
+                      </Col>
+                      <Col xs={9} md={11}>
+                        {beer.name}
+                      </Col>
+                    </Row>
+                  </Container>
+              )
+            )
+          }
+        </div>
       </div>
+
+
+
     )
   }
 }
