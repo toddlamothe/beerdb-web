@@ -1,3 +1,12 @@
 .brewery-search-directions {
   text-align: center;
 }
+.beer-label-col {
+  border: 0px solid #ccc;
+  height:64px;
+}
+.beer-text-col {
+  border: 0px solid #ccc;
+  padding: 20px 0px;
+  height:64px;
+}
