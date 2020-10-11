@@ -4,14 +4,13 @@ import ListGroup from 'react-bootstrap/ListGroup';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import Alert from 'react-bootstrap/Alert'
 import BreweryDataService from '../services/BreweryService';
 import { spinnerService } from '../services/SpinnerService';
 
 class BreweryInfoCard extends React.Component {
   constructor(props) {
     super(props);
-    // var beersJson = require('./beers.json');
-    // console.log("beersJson.data = ", beersJson.data);
     var directionsUrlBase = "https://www.google.com/maps/dir/?api=1&origin=&destination=";
     var directionsUrl = directionsUrlBase + props.brewery.coords.lat + ", " + props.brewery.coords.lng;
     this.state = {
@@ -37,7 +36,6 @@ class BreweryInfoCard extends React.Component {
   }
 
   render() {
-    console.log("this.state.beers = ", this.state.beers);
     return (
       <div>
         <div class="brewery-search-directions">
@@ -54,6 +52,9 @@ class BreweryInfoCard extends React.Component {
           </small>
         </div>
           <div>
+          <Alert variant="primary">
+            Beers:
+          </Alert>
           {
             this.state.beers.map( (beer) => (
                   <Container>
