@@ -15,7 +15,7 @@ class BreweryInfoCard extends React.Component {
     var directionsUrl = directionsUrlBase + props.brewery.coords.lat + ", " + props.brewery.coords.lng;
     this.state = {
       brewery : props.brewery,
-      breweryDirectionsUrl : this.directionsUrl,
+      breweryDirectionsUrl : directionsUrl,
       beers : []
     }
   }
@@ -52,6 +52,7 @@ class BreweryInfoCard extends React.Component {
           </small>
         </div>
           <div>
+          <hr />
           <Alert variant="primary">
             Beers:
           </Alert>
@@ -59,7 +60,7 @@ class BreweryInfoCard extends React.Component {
             this.state.beers.map( (beer) => (
                   <Container>
                     <Row className="show-grid" float="center">
-                      <Col xs={3} md={1}>
+                      <Col className="beer-label-col" xs={3} md={2}>
                         {
                           beer.labels && beer.labels.icon &&
                           <img
@@ -68,7 +69,7 @@ class BreweryInfoCard extends React.Component {
                           />
                         }
                       </Col>
-                      <Col xs={9} md={11}>
+                      <Col className="beer-text-col" xs={9} md={10}>
                         {beer.name}
                       </Col>
                     </Row>
