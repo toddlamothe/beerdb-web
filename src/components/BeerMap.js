@@ -56,13 +56,16 @@ class BeerMap extends Component {
 
       const bounds = new window.google.maps.LatLngBounds();
       this.props.breweries.map( (brewery) => {
+        console.log("brewery.images = ", brewery.images);
+        // console.log("brewery.images.icon = ", brewery.images.icon);
+        var breweryIcon = (brewery.images && brewery.images.icon) ?  brewery.images.icon : require("../images/Icon-Small-40.png")
         bounds.extend(brewery.coords)
         breweryMarker = new this.state.maps.Marker({
           position: brewery.coords,
           map,
           title: '[BREWERY NAME]',
           snippet: "[BREWERY SNIPPET]",
-          icon: require("../images/Icon-Small-40.png"),
+          icon: breweryIcon,
         });
 
         breweryMarker.addListener('click', function() {
