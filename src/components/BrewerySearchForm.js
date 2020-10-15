@@ -57,6 +57,9 @@ class BrewerySearchForm extends React.Component {
       lng : "",
       showError : false
     });
+
+    // City/State/Zip should already be set by
+    // the change handlers for those input controls
     this.props.onSearchSubmitted(this.state)
   }
 

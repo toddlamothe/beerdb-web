@@ -22,14 +22,21 @@ class Main extends Component {
       zoom : 7
     };
     const querystringParameters = queryString.parse(props.location.search)
-    const mapState = {
-      center : {
-        lat : querystringParameters.lat ? Number(querystringParameters.lat) : defaultMapState.center.lat,
-        lng : querystringParameters.lng ? Number(querystringParameters.lng) : defaultMapState.center.lng
-      },
-      zoom : querystringParameters.zoom ? Number(querystringParameters.zoom) : defaultMapState.zoom,
-      fitBounds : true
-    };
+    var mapState;
+    // Filter criteria in the querystring overrides lat/lng in the querystring
+    if (querystringParameters.city || querystringParameters.state || querystringParameters.zip) {
+      // Perform brewery search based on filter criteria in querystring
+      console.log("querystringParameters = ", querystringParameters);
+    } else {
+      mapState = {
+        center : {
+          lat : querystringParameters.lat ? Number(querystringParameters.lat) : defaultMapState.center.lat,
+          lng : querystringParameters.lng ? Number(querystringParameters.lng) : defaultMapState.center.lng
+        },
+        zoom : querystringParameters.zoom ? Number(querystringParameters.zoom) : defaultMapState.zoom,
+        fitBounds : true
+      };
+    }
 
     this.state = {
       loading : false,
