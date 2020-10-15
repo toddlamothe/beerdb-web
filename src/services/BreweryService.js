@@ -54,7 +54,8 @@ class BreweryDataService {
               "id" : beer.id,
               "abv" : beer.abv,
               "ibu" : beer.ibu,
-              "labels" : beer.labels
+              "labels" : beer.labels,
+              "style" :beer.style
           }
       });
       return breweryBeers;
