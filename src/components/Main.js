@@ -31,12 +31,15 @@ class Main extends Component {
         lng : querystringParameters.lng ? Number(querystringParameters.lng) : defaultMapState.center.lng
       },
       zoom : querystringParameters.zoom ? Number(querystringParameters.zoom) : defaultMapState.zoom,
+      city : "",
+      state: "",
+      zip: "",
       fitBounds : true
     };
 
     this.state = {
       loading : false,
-      isSearchPanelOpen : !this.searchParametersExist(),
+      isSearchPanelOpen : !this.urlSearchParametersExist(),
       mapState : mapState,
       isInfoPanelOpen : false,
       selectedBrewery : {
@@ -51,10 +54,10 @@ class Main extends Component {
   };
 
   componentDidMount() {
+    console.log("[componentDidMount]");
     const querystringParameters = queryString.parse(this.props.location.search)
-    var mapState;
-    // Filter criteria in the querystring overrides lat/lng in the querystring
-    if (this.searchParametersExist()) {
+    // When first loading, filter criteria in the querystring overrides lat/lng in the querystring
+    if (this.urlSearchParametersExist()) {
       // Perform brewery search based on filter criteria in querystring
       var searchCriteria = {
         city : querystringParameters.city ? querystringParameters.city : "",
@@ -65,18 +68,20 @@ class Main extends Component {
         showError : false
       };
 
+      var newRoute = "/?lat=" + this.state.mapState.center.lat + "&lng=" + this.state.mapState.center.lng + "&zoom=" + this.state.mapState.zoom + "&city=" + this.state.mapState.city + "&state=" + this.state.mapState.state + "&zip=" + this.state.mapState.zip;
+      this.pushRoute(newRoute);
       this.brewerySearch(searchCriteria);
     }
   }
 
-  searchParametersExist() {
+  urlSearchParametersExist() {
     const querystringParameters = queryString.parse(this.props.location.search)
     return (querystringParameters.city || querystringParameters.state || querystringParameters.zip);
   }
 
   mapStateChangedHandler(mapState, fitBounds = false) {
     const querystringParameters = this.state.mapState.center;
-    console.log("[mapStateChangedHandler] : this.state = ", this.state);
+    // console.log("[mapStateChangedHandler] : this.state = ", this.state);
     // If new route matches current route, do not push duplicate to history
     if ( (mapState.center.lat == querystringParameters.lat) &&
         (mapState.center.lng == querystringParameters.lng)
@@ -85,19 +90,26 @@ class Main extends Component {
     };
 
     // Build new querystring and add it to route history
-    var newRoute = "/?lat=" + mapState.center.lat + "&lng=" + mapState.center.lng + "&zoom=" + mapState.zoom;
-    this.props.history.push(newRoute);
+    var newRoute = "/?lat=" + mapState.center.lat + "&lng=" + mapState.center.lng + "&zoom=" + mapState.zoom + "&city=" + this.state.mapState.city + "&state=" + this.state.mapState.state + "&zip=" + this.state.mapState.zip;
+    this.pushRoute(newRoute);
     this.setState( {
       mapState : {
         center : {
           lat : mapState.center.lat,
           lng : mapState.center.lng
         },
+        city : mapState.city,
+        state : mapState.state,
+        zip : mapState.zip,
         zoom : mapState.zoom,
         fitBounds : fitBounds
       }
     });
   };
+
+  pushRoute(newRoute) {
+    this.props.history.push(newRoute);
+  }
 
   toggleSearchPanel() {
     this.setState({
@@ -114,13 +126,19 @@ class Main extends Component {
     spinnerService.show("brewerySearchSpinner");
     breweryService.getBreweries(searchCriteria).then((breweries) => {
       if (breweries) {
+        // Build new querystring and add it to route history
+        var newRoute = "/?lat=" + this.state.mapState.center.lat + "&lng=" + this.state.mapState.center.lng + "&zoom=" + this.state.mapState.zoom + "&city=" + searchCriteria.city + "&state=" + searchCriteria.state + "&zip=" + searchCriteria.zip;
+        this.pushRoute(newRoute);
         this.setState( {
           breweries : breweries,
           isSearchPanelOpen : false,
           mapState : {
             center : this.state.mapState.center,
             zoom : this.state.mapState.zoom,
-            fitBounds : true
+            city : searchCriteria.city,
+            state: searchCriteria.state,
+            zip: searchCriteria.zip,
+            fitBounds : true,
           },
           showNoResultsError : false,
           noResultsErrorMessage : ""
