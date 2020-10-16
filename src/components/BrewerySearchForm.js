@@ -18,7 +18,6 @@ import Carousel from 'react-bootstrap/Carousel';
 class BrewerySearchForm extends React.Component {
   constructor(props) {
     super(props);
-    console.log("[BrewerySearchForm]: props = ", props);
     this.state = {
       city : "",
       state : "",
