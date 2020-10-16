@@ -36,10 +36,6 @@ class BreweryInfoCard extends React.Component {
   }
 
   render() {
-    this.state.beers.map( (beer) => {
-      console.log("beer = ", beer)
-    }
-  )
     return (
       <div>
         <div class="brewery-search-directions">
@@ -60,27 +56,27 @@ class BreweryInfoCard extends React.Component {
           <Alert variant="primary">
             Beers:
           </Alert>
+          <Container>
           {
             this.state.beers.map( (beer) => (
-                  <Container>
-                    <Row className="show-grid" float="center">
-                      <Col className="beer-label-col" xs={3} md={2}>
-                        {
-                          beer.labels && beer.labels.icon &&
-                          <img
-                            src={beer.labels.icon}
-                            alt={beer.name}
-                          />
-                        }
-                      </Col>
-                      <Col className="beer-text-col" xs={9} md={10}>
-                        {beer.name} <small>({(beer.style && beer.style.shortName) ? beer.style.shortName : "unspecified"})</small>
-                      </Col>
-                    </Row>
-                  </Container>
+              <Row key={beer.name} className="show-grid" float="center">
+                <Col className="beer-label-col" xs={3} md={2}>
+                  {
+                    beer.labels && beer.labels.icon &&
+                    <img
+                      src={beer.labels.icon}
+                      alt={beer.name}
+                    />
+                  }
+                </Col>
+                <Col className="beer-text-col" xs={9} md={10}>
+                  {beer.name} <small>({(beer.style && beer.style.shortName) ? beer.style.shortName : "unspecified"})</small>
+                </Col>
+              </Row>
               )
             )
           }
+          </Container>
         </div>
       </div>
 
