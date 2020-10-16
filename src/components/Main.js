@@ -24,10 +24,60 @@ class Main extends Component {
     const querystringParameters = queryString.parse(props.location.search)
     var mapState;
     // Filter criteria in the querystring overrides lat/lng in the querystring
-    if (querystringParameters.city || querystringParameters.state || querystringParameters.zip) {
-      // Perform brewery search based on filter criteria in querystring
-      console.log("querystringParameters = ", querystringParameters);
-    } else {
+    // if (querystringParameters.city || querystringParameters.state || querystringParameters.zip) {
+    //   // Perform brewery search based on filter criteria in querystring
+    //   console.log("querystringParameters = ", querystringParameters);
+    //   var searchCriteria = {
+    //     city : querystringParameters.city ? querystringParameters.city : "",
+    //     state : querystringParameters.state ? querystringParameters.state : "",
+    //     zip : querystringParameters.zip ? querystringParameters.zip : "",
+    //     lat : "",
+    //     lng : "",
+    //     showError : false
+    //   };
+    //   console.log("search criteria = ", searchCriteria);
+    //   // this.state = {
+    //   //   mapState : defaultMapState,
+    //   // }
+    //   // this.brewerySearch(searchCriteria);
+    //
+    //   var breweryService = new BreweryDataService();
+    //   spinnerService.show("brewerySearchSpinner");
+    //   breweryService.getBreweries(searchCriteria).then((breweries) => {
+    //     console.log("breweries = ", breweries);
+    //     console.log("setting this.state.mapState to ", defaultMapState);
+    //     if (breweries) {
+    //       console.log("breweries returned. setting state...");
+    //       this.state = {
+    //         breweries : breweries,
+    //         isSearchPanelOpen : false,
+    //         mapState : {
+    //           center : defaultMapState.center,
+    //           zoom : defaultMapState.zoom,
+    //           fitBounds : true
+    //         },
+    //         showNoResultsError : false,
+    //         noResultsErrorMessage : ""
+    //       }
+    //     } else {
+    //       console.log("no breweries returned. setting state...");
+    //       // Search returned no results
+    //       this.state = {
+    //         showNoResultsError : true,
+    //         noResultsErrorMessage : "Search returned no results please try harder",
+    //         mapState : {
+    //           center : defaultMapState.center,
+    //           zoom : defaultMapState.zoom,
+    //           fitBounds : true
+    //         }
+    //       }
+    //     }
+    //     spinnerService.hide("brewerySearchSpinner");
+    //   });
+    //
+    //
+    //
+    // } else {
       mapState = {
         center : {
           lat : querystringParameters.lat ? Number(querystringParameters.lat) : defaultMapState.center.lat,
@@ -36,7 +86,7 @@ class Main extends Component {
         zoom : querystringParameters.zoom ? Number(querystringParameters.zoom) : defaultMapState.zoom,
         fitBounds : true
       };
-    }
+    // }
 
     this.state = {
       loading : false,
@@ -53,6 +103,67 @@ class Main extends Component {
     this.breweryMarkerClickHandler = this.breweryMarkerClickHandler.bind(this);
     this.showBreweryInfoPanel = this.showBreweryInfoPanel.bind(this);
   };
+
+  componentDidMount() {
+    console.log("[componentDidMount]");
+
+    const defaultMapState = {
+      center: { lat: 39.8283,lng: -98.5795 },
+      zoom : 7
+    };
+    const querystringParameters = queryString.parse(this.props.location.search)
+    var mapState;
+    // Filter criteria in the querystring overrides lat/lng in the querystring
+    if (querystringParameters.city || querystringParameters.state || querystringParameters.zip) {
+      // Perform brewery search based on filter criteria in querystring
+      console.log("Brewery search filters exist in querystring: ", querystringParameters);
+      var searchCriteria = {
+        city : querystringParameters.city ? querystringParameters.city : "",
+        state : querystringParameters.state ? querystringParameters.state : "",
+        zip : querystringParameters.zip ? querystringParameters.zip : "",
+        lat : "",
+        lng : "",
+        showError : false
+      };
+      console.log("search criteria = ", searchCriteria);
+      // this.state = {
+      //   mapState : defaultMapState,
+      // }
+      // this.brewerySearch(searchCriteria);
+
+      var breweryService = new BreweryDataService();
+      spinnerService.show("brewerySearchSpinner");
+      breweryService.getBreweries(searchCriteria).then((breweries) => {
+        console.log("breweries = ", breweries);
+        console.log("setting this.state.mapState to ", defaultMapState);
+        if (breweries) {
+          console.log("breweries returned. setting state...");
+          this.setState({
+              breweries : breweries,
+              isSearchPanelOpen : false,
+              showNoResultsError : false,
+              noResultsErrorMessage : ""
+            }
+          )
+        } else {
+          console.log("no breweries returned. setting state...");
+          // Search returned no results
+          this.setState ( {
+              showNoResultsError : true,
+              noResultsErrorMessage : "Search returned no results please try harder",
+              mapState : {
+                center : defaultMapState.center,
+                zoom : defaultMapState.zoom,
+                fitBounds : true
+              }
+            }
+          )
+        }
+        spinnerService.hide("brewerySearchSpinner");
+      });
+    }
+
+  }
 
   mapStateChangedHandler(mapState, fitBounds = false) {
     const querystringParameters = this.state.mapState.center;
@@ -85,6 +196,11 @@ class Main extends Component {
   };
 
   onSearchSubmitted(searchCriteria) {
+    this.brewerySearch(searchCriteria);
+  }
+
+  brewerySearch(searchCriteria) {
+    console.log("[brewerySearch] searchCriteria = ", searchCriteria);
     var breweryService = new BreweryDataService();
     spinnerService.show("brewerySearchSpinner");
     breweryService.getBreweries(searchCriteria).then((breweries) => {

@@ -38,7 +38,7 @@ class BreweryInfoCard extends React.Component {
   render() {
     return (
       <div>
-        <div class="brewery-search-directions">
+        <div className="brewery-search-directions">
             <a target="#" href={this.state.breweryDirectionsUrl}>
               Directions
             </a> |
