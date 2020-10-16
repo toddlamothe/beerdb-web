@@ -36,7 +36,7 @@ class Main extends Component {
 
     this.state = {
       loading : false,
-      isSearchPanelOpen : true,
+      isSearchPanelOpen : !this.searchParametersExist(),
       mapState : mapState,
       isInfoPanelOpen : false,
       selectedBrewery : {
@@ -54,7 +54,7 @@ class Main extends Component {
     const querystringParameters = queryString.parse(this.props.location.search)
     var mapState;
     // Filter criteria in the querystring overrides lat/lng in the querystring
-    if (querystringParameters.city || querystringParameters.state || querystringParameters.zip) {
+    if (this.searchParametersExist()) {
       // Perform brewery search based on filter criteria in querystring
       var searchCriteria = {
         city : querystringParameters.city ? querystringParameters.city : "",
@@ -69,8 +69,14 @@ class Main extends Component {
     }
   }
 
+  searchParametersExist() {
+    const querystringParameters = queryString.parse(this.props.location.search)
+    return (querystringParameters.city || querystringParameters.state || querystringParameters.zip);
+  }
+
   mapStateChangedHandler(mapState, fitBounds = false) {
     const querystringParameters = this.state.mapState.center;
+    console.log("[mapStateChangedHandler] : this.state = ", this.state);
     // If new route matches current route, do not push duplicate to history
     if ( (mapState.center.lat == querystringParameters.lat) &&
         (mapState.center.lng == querystringParameters.lng)
