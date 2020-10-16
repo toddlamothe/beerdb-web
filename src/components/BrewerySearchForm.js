@@ -18,7 +18,6 @@ import Carousel from 'react-bootstrap/Carousel';
 class BrewerySearchForm extends React.Component {
   constructor(props) {
     super(props);
-    console.log("[BrewerySearchForm]: props = ", props);
     this.state = {
       city : "",
       state : "",
@@ -138,62 +137,55 @@ class BrewerySearchForm extends React.Component {
     };
     return (
       <React.Fragment>
-        <Container fluid style={styles.grid}>
-        <Row>
-          <Col style={styles.col}>
-            {this.renderError()}
-          </Col>
-        </Row>
-        <Row>
-          <Col>
-            <Form>
-              <Form.Group controlId="city">
-                <Form.Label>City</Form.Label>
-                <Form.Control
-                  type="text"
-                  size="sm"
-                  placeholder="enter city"
-                  onChange={this.handleChangeCity}
-                  />
-              </Form.Group>
-              <Form.Group controlId="state">
-                <Form.Label>State</Form.Label>
-                <Form.Control
-                  type="text"
-                  size="sm"
-                  placeholder="enter state"
-                  onChange={this.handleChangeState}
-                  />
-              </Form.Group>
-              <Form.Group controlId="zip">
-                <Form.Label>Zip</Form.Label>
-                <Form.Control
-                  type="text"
-                  size="sm"
-                  placeholder="enter zip"
-                  onChange={this.handleChangeZip}
-                  />
-              </Form.Group>
-              <Button variant="primary" type="submit" onClick={(e) => this.handleBrewerySearch(e)}>Search</Button>&nbsp;
-              <Button variant="primary" type="submit" onClick={(e) => this.handleNearMeSearch(e)}>Near Me</Button>
-            </Form>
-          </Col>
-        </Row>
-
-
-        <Row>
-
-        </Row>
-
-
-
-        <Row>
-          <div class="centered">
-          <small>
-            <Link to="/about">About Beerlvr</Link>
-          </small>
-          </div>
-        </Row>
+        <Container>
+          <Row>
+            <Col style={styles.col}>
+              {this.renderError()}
+            </Col>
+          </Row>
+          <Row>
+            <Col>
+              <Form>
+                <Form.Group controlId="city">
+                  <Form.Label>City</Form.Label>
+                  <Form.Control
+                    type="text"
+                    size="sm"
+                    placeholder="enter city"
+                    onChange={this.handleChangeCity}
+                    />
+                </Form.Group>
+                <Form.Group controlId="state">
+                  <Form.Label>State</Form.Label>
+                  <Form.Control
+                    type="text"
+                    size="sm"
+                    placeholder="enter state"
+                    onChange={this.handleChangeState}
+                    />
+                </Form.Group>
+                <Form.Group controlId="zip">
+                  <Form.Label>Zip</Form.Label>
+                  <Form.Control
+                    type="text"
+                    size="sm"
+                    placeholder="enter zip"
+                    onChange={this.handleChangeZip}
+                    />
+                </Form.Group>
+                <Button variant="primary" type="submit" onClick={(e) => this.handleBrewerySearch(e)}>Search</Button>&nbsp;
+                <Button variant="primary" type="submit" onClick={(e) => this.handleNearMeSearch(e)}>Near Me</Button>
+              </Form>
+            </Col>
+          </Row>
+          <Row>
+            <div><hr /></div>
+          </Row>
+          <Row>
+            <small>
+              <Link to="/about">About Beerlvr</Link>
+            </small>
+          </Row>
         </Container>
       </React.Fragment>
     );
