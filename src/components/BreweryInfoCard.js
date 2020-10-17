@@ -22,6 +22,7 @@ class BreweryInfoCard extends React.Component {
 
   componentDidMount() {
     var breweryService = new BreweryDataService();
+    spinnerService.show("brewerySearchSpinner");
     breweryService.getBreweryBeers(this.state.brewery.id).then((beers) => {
       if (beers) {
         this.setState( {
