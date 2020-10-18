@@ -1,0 +1,32 @@
+
+.about-header {
+  padding: 10px 10px;
+  text-align: center;
+  color: #393234;
+  font-family: "proxima-nova","helvetica","arial","sans";
+  font-size: 15px;
+  font-weight: 300;
+  color: #393234;
+  font-family: "proxima-nova","helvetica","arial","sans";
+  font-size: 15px;
+  font-weight: 300;
+  height: 100%;
+}
+
+.about-text {
+  color: #393234;
+  font-family: "proxima-nova","helvetica","arial","sans";
+  font-size: 15px;
+  font-weight: 300;
+  color: #393234;
+  font-family: "proxima-nova","helvetica","arial","sans";
+  font-size: 15px;
+  font-weight: 300;
+  height: 100%;
+  margin: 0;
+  padding: 25px;
+}
+
+.about-image {
+  width: 100%;
+}

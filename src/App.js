@@ -1,6 +1,7 @@
 import React from 'react';
 import Main from './components/Main';
 import About from './components/About.js'
+import PageNotFound from './components/404.js'
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {Route, Switch} from 'react-router-dom';
@@ -20,8 +21,7 @@ function App() {
           <About {...props} />
           )}
         />
-
-
+        <Route component={PageNotFound} />
       </Switch>
     </div>
   );
