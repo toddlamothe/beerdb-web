@@ -16,7 +16,7 @@ class Header extends React.Component {
         <Navbar bg="light" expand="lg">
           <Navbar.Brand href="#home">
             <img src={ require('../images/beerlvr-logo-sm.png') } />&nbsp;
-            Brewlvr
+            brewlvr
           </Navbar.Brand>
           <Nav className="ml-auto">
             <HamburgerMenu
