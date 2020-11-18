@@ -11,6 +11,7 @@ ReactGA.pageview(window.location.pathname + window.location.search);
 
 function App() {
   const { pathname } = useLocation();
+  
 
   return (
     <div className="App">
